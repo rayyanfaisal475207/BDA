@@ -8,8 +8,11 @@ from src.lsh import LSH, SimHash
 from src.baseline import TFIDFRetrieval
 from src.data_processing import DocumentProcessor
 from src.analytics import QueryPatternMiner, RetrievalAnalytics
-import openai
+import google.generativeai as genai
 import os
+from dotenv import load_dotenv
+
+load_dotenv() # Load variables from .env
 
 
 class AcademicQASystem:
@@ -50,12 +53,14 @@ class AcademicQASystem:
             self.setup_llm()
 
     def setup_llm(self):
-        """Setup OpenAI API."""
-        api_key = os.getenv('OPENAI_API_KEY')
+        """Setup Google Gemini API."""
+        api_key = os.getenv('GOOGLE_API_KEY')
         if api_key:
-            openai.api_key = api_key
+            genai.configure(api_key=api_key)
+            # Using Gemini 3 Flash Preview (Current state-of-the-art in 2026)
+            self.model = genai.GenerativeModel('gemini-3-flash-preview')
         else:
-            print("Warning: OPENAI_API_KEY not set. LLM features disabled.")
+            print("Warning: GOOGLE_API_KEY not set. LLM features disabled.")
 
     def add_document(self, pdf_path: str, doc_id: str):
         """
@@ -216,7 +221,7 @@ class AcademicQASystem:
 
     def generate_answer_llm(self, query: str, retrieved_chunks: List[str]) -> str:
         """
-        Generate answer using LLM based on retrieved chunks.
+        Generate answer using Gemini based on retrieved chunks.
 
         Args:
             query: Query text
@@ -225,27 +230,26 @@ class AcademicQASystem:
         Returns:
             Generated answer
         """
+        if not hasattr(self, 'model'):
+            return self.generate_answer_extractive(query, retrieved_chunks)
+
         context = "\n".join(retrieved_chunks)
+        prompt = f"""
+        You are an expert academic advisor. Answer the following question based ONLY on the provided context from the university handbook.
+        If the answer is not in the context, say "I cannot find the answer in the handbook."
+        
+        Context:
+        {context}
+        
+        Question: {query}
+        
+        Answer:"""
 
         try:
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a helpful assistant answering questions about university handbooks. Answer based only on the provided context."
-                    },
-                    {
-                        "role": "user",
-                        "content": f"Context:\n{context}\n\nQuestion: {query}\n\nAnswer:"
-                    }
-                ],
-                temperature=0.7,
-                max_tokens=200
-            )
-            return response.choices[0].message.content
+            response = self.model.generate_content(prompt)
+            return response.text
         except Exception as e:
-            print(f"LLM error: {e}")
+            print(f"Gemini error: {e}")
             return self.generate_answer_extractive(query, retrieved_chunks)
 
     def answer_query(self, query: str, method: str = 'lsh', top_k: int = 10,

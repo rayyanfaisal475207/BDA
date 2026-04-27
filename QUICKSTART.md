@@ -12,6 +12,10 @@ conda env create -f environment.yml
 
 # 2. Activate the environment
 conda activate bda_project
+
+# 3. Setup your API Key
+# Create a .env file and add your key:
+# GOOGLE_API_KEY=your_key_here
 ```
 
 ## 🚀 2. Running the System
