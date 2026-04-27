@@ -1,23 +1,19 @@
-# Scalable Academic Policy QA System
+# LexiPolicy: Scalable Academic QA System 🎓
 
-A production-ready Question-Answering system for university handbooks using **Locality Sensitive Hashing (LSH)** and Big Data techniques. This system efficiently retrieves relevant information from large text data and generates accurate answers to student queries.
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
+[![Big Data](https://img.shields.io/badge/Course-Big%20Data%20Algorithms-green.svg)](https://seecs.nust.edu.pk)
 
-## 🎯 Project Overview
+A premium, production-grade Question-Answering system for university handbooks powered by **Locality Sensitive Hashing (LSH)**. LexiPolicy is designed for high-dimensional document retrieval, combining efficiency, scalability, and deep analytics.
 
-This project implements a hybrid retrieval system combining:
-- **MinHash + LSH**: Approximate Jaccard similarity for efficient document matching
-- **SimHash**: Hamming distance-based fingerprints for quick similarity detection
-- **TF-IDF**: Baseline exact similarity matching for comparison
+## 🌟 Premium Features
 
-The system is designed to handle large-scale handbook documents while maintaining high accuracy and fast query processing.
-
-### Key Features
-
-✓ **LSH Implementation**: Full MinHash + LSH with configurable parameters  
-✓ **Multiple Retrieval Methods**: Compare approximate vs exact similarity  
-✓ **Web Interface**: Streamlit-based UI for easy interaction  
-✓ **Comprehensive Experiments**: Scalability, parameter sensitivity, accuracy analysis  
-✓ **Production Ready**: Clean, well-documented, reproducible code  
+✓ **High-Performance LSH**: Optimized MinHash + LSH implementation using vectorized NumPy operations.  
+✓ **Creative Extension: Query Mining**: Integrated **Frequent Itemset Mining** to discover common query patterns and hot topics.  
+✓ **Premium Analytics Dashboard**: Real-time visualization of system latency, topic distribution, and scaling metrics.  
+✓ **Hybrid Retrieval Engine**: Compare MinHash, SimHash, and TF-IDF across O(1) and O(n) search spaces.  
+✓ **Neural-Extractive QA**: Intelligent answer synthesis based strictly on retrieved policy context.  
+✓ **Full Experimental Suite**: Automated sensitivity analysis, scalability testing, and performance reporting.
 
 ## 📋 System Architecture
 

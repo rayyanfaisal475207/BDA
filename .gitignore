@@ -111,7 +111,5 @@ venv.bak/
 Thumbs.db
 
 # Project specific
-data/handbooks/
-*.pdf
 .streamlit/
 results/

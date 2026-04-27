@@ -7,6 +7,7 @@ from typing import List, Dict, Tuple, Optional
 from src.lsh import LSH, SimHash
 from src.baseline import TFIDFRetrieval
 from src.data_processing import DocumentProcessor
+from src.analytics import QueryPatternMiner, RetrievalAnalytics
 import openai
 import os
 
@@ -38,6 +39,10 @@ class AcademicQASystem:
         self.documents = {}  # chunk_id -> chunk_text
         self.doc_metadata = {}  # chunk_id -> {source, page, etc}
         self.simhash_fingerprints = {}  # chunk_id -> fingerprint
+
+        # Analytics
+        self.miner = QueryPatternMiner(min_support=0.05)
+        self.analytics = RetrievalAnalytics()
 
         if use_llm:
             self.setup_llm()
@@ -146,20 +151,29 @@ class AcademicQASystem:
         if method == 'lsh':
             start = time.time()
             results = self.retrieve_lsh(query, top_k)
+            duration = time.time() - start
             if timing_data is not None:
-                timing_data['retrieval_time'] = time.time() - start
+                timing_data['retrieval_time'] = duration
+            self.analytics.log_performance('lsh', duration, len(results))
         elif method == 'simhash':
             start = time.time()
             results = self.retrieve_simhash(query, top_k)
+            duration = time.time() - start
             if timing_data is not None:
-                timing_data['retrieval_time'] = time.time() - start
+                timing_data['retrieval_time'] = duration
+            self.analytics.log_performance('simhash', duration, len(results))
         elif method == 'tfidf':
             start = time.time()
             results = self.retrieve_tfidf(query, top_k)
+            duration = time.time() - start
             if timing_data is not None:
-                timing_data['retrieval_time'] = time.time() - start
+                timing_data['retrieval_time'] = duration
+            self.analytics.log_performance('tfidf', duration, len(results))
         else:
             raise ValueError(f"Unknown retrieval method: {method}")
+
+        # Log query for pattern mining
+        self.miner.log_query(query)
 
         return results, timing_data
 
@@ -270,8 +284,8 @@ class AcademicQASystem:
         }
 
     def get_statistics(self) -> Dict:
-        """Get system statistics."""
-        return {
+        """Get system statistics and analytics."""
+        stats = {
             'total_chunks': len(self.documents),
             'total_tokens': sum(len(self.processor.tokenize(text))
                                for text in self.documents.values()),
@@ -280,5 +294,8 @@ class AcademicQASystem:
                 'simhash': self.use_simhash,
                 'tfidf': self.use_tfidf,
                 'llm': self.use_llm
-            }
+            },
+            'performance_summary': self.analytics.get_summary(),
+            'hot_topics': self.miner.get_hot_topics(top_n=10)
         }
+        return stats

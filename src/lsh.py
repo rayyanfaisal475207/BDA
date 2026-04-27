@@ -18,16 +18,20 @@ class MinHash:
             num_hashes: Number of hash functions to use
         """
         self.num_hashes = num_hashes
-        self.hash_seeds = np.random.randint(0, 2**32, num_hashes)
+        # Generate random coefficients for hash functions: h(x) = (ax + b) % p
+        # Use a large prime number p
+        self.p = 2**61 - 1  # Mersenne prime
+        self.a = np.random.randint(1, self.p, num_hashes, dtype=np.int64)
+        self.b = np.random.randint(0, self.p, num_hashes, dtype=np.int64)
 
-    def _hash_token(self, token: str, seed: int) -> int:
-        """Hash a single token with a seed."""
-        h = hashlib.md5(f"{token}_{seed}".encode()).hexdigest()
-        return int(h, 16)
+    def _hash_token_to_int(self, token: str) -> int:
+        """Convert token string to integer using SHA-256."""
+        h = hashlib.sha256(token.encode()).hexdigest()
+        return int(h, 16) % self.p
 
     def compute_signature(self, tokens: Set[str]) -> np.ndarray:
         """
-        Compute MinHash signature for a set of tokens.
+        Compute MinHash signature for a set of tokens using vectorized operations.
 
         Args:
             tokens: Set of tokens/words
@@ -35,13 +39,19 @@ class MinHash:
         Returns:
             Array of hash values (signature)
         """
-        signature = np.full(self.num_hashes, float('inf'))
+        if not tokens:
+            return np.full(self.num_hashes, self.p, dtype=np.int64)
 
-        for token in tokens:
-            for i, seed in enumerate(self.hash_seeds):
-                hash_val = self._hash_token(token, seed)
-                signature[i] = min(signature[i], hash_val)
-
+        # Map tokens to integers
+        token_hashes = np.array([self._hash_token_to_int(t) for t in tokens], dtype=np.int64)
+        
+        # Vectorized computation of all hash functions for all tokens
+        # shape: (num_hashes, num_tokens)
+        hash_values = (np.outer(self.a, token_hashes) + self.b[:, np.newaxis]) % self.p
+        
+        # Take the minimum across tokens for each hash function
+        signature = np.min(hash_values, axis=1)
+        
         return signature
 
     def jaccard_similarity(self, sig1: np.ndarray, sig2: np.ndarray) -> float:
@@ -55,7 +65,7 @@ class MinHash:
             Estimated Jaccard similarity [0, 1]
         """
         matches = np.sum(sig1 == sig2)
-        return matches / len(sig1)
+        return float(matches / len(sig1))
 
 
 class LSH:
@@ -144,6 +154,9 @@ class SimHash:
         """Hash token to binary vector."""
         h = hashlib.md5(token.encode()).hexdigest()
         binary = bin(int(h, 16))[2:].zfill(self.hash_size)
+        # Ensure we only take the specified number of bits (the last ones)
+        if len(binary) > self.hash_size:
+            binary = binary[-self.hash_size:]
         return np.array([int(b) for b in binary])
 
     def compute_fingerprint(self, tokens: List[str]) -> np.ndarray:
