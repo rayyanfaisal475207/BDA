@@ -1,10 +1,10 @@
-# LexiPolicy: Scalable Academic Policy QA System - Project Report
+# Finrate: Scalable Academic Policy QA System - Project Report
 
 **Course**: Big Data Algorithms  
 **Project Title**: Scalable Question-Answering System over University Handbooks  
-**Team**: LexiPolicy Dev Team  
-**Date**: April 27, 2025  
-**Submission Deadline**: April 27, 2025
+**Team Members**: Rayyan Faisal, Haadhee, Muhammad Faizan Anwar  
+**Date**: April 27, 2026  
+**Status**: Final Master Submission
 
 ---
 

@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowra | Phase 1 Absolute Master Submission Report</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#eef2ff',
+                primaryTextColor: '#1e1b4b',
+                primaryBorderColor: '#6366f1',
+                lineColor: '#6366f1',
+                secondaryColor: '#ecfdf5',
+                tertiaryColor: '#fffbeb',
+                mainBkg: '#ffffff',
+                nodeBorder: '#000000',
+                clusterBkg: '#f8fafc',
+                titleColor: '#0f172a',
+                edgeLabelBackground: '#ffffff',
+                pie1: '#6366f1', pie2: '#10b981', pie3: '#f59e0b', pie4: '#ef4444',
+                fontFamily: 'Inter',
+                fontSize: '16px',
+                labelBoxBorderColor: '#6366f1',
+                labelBoxBkgColor: '#eef2ff',
+                arrowheadColor: '#6366f1',
+                borderWidth: '2px'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --title-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --mono-font: 'JetBrains Mono', monospace;
+            --text-color: #000000;
+            --accent-slate: #1e293b;
+            --paper-width: 320mm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4f5;
+            font-family: var(--body-font);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 40px 0;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 280mm Ultra-Wide Paper Layout */
+        .paper {
+            background-color: white;
+            width: var(--paper-width);
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 15mm 20mm;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Typography */
+        p {
+            text-align: justify;
+            margin-bottom: 0.6em;
+            font-size: 11.5pt;
+            font-weight: 400;
+            color: #334155;
+        }
+
+        .title-block {
+            text-align: center;
+            margin-bottom: 3.5em;
+            padding-bottom: 2em;
+            border-bottom: 1px solid #000;
+        }
+
+        .logo-container {
+            margin-bottom: 2em;
+        }
+
+        .logo-container img {
+            height: 120px;
+            width: auto;
+            filter: grayscale(1);
+        }
+
+        .title-block h1 {
+            font-family: var(--title-font);
+            font-size: 42pt;
+            font-weight: 800;
+            margin-bottom: 0.1em;
+            letter-spacing: -2px;
+            color: #000;
+        }
+
+        .subtitle {
+            font-size: 13pt;
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2em;
+            display: block;
+        }
+
+        /* Team Showcase Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 3em;
+            text-align: left;
+            border-top: 1px solid #000;
+            padding-top: 2em;
+        }
+
+        .team-member {
+            padding: 5px;
+        }
+
+        .member-name {
+            display: block;
+            font-weight: 700;
+            font-size: 11pt;
+            color: #000;
+        }
+
+        .member-role {
+            display: block;
+            font-size: 9pt;
+            color: #444;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* Abstract Box */
+        .abstract {
+            margin: 0 10% 3.5em 10%;
+            font-size: 11pt;
+            text-align: justify;
+            background: #ffffff;
+            border-radius: 0;
+            padding: 2.5em;
+            border: 3px solid #000;
+            box-shadow: 12px 12px 0px #000;
+        }
+
+        .abstract-title {
+            font-family: var(--title-font);
+            font-weight: 800;
+            font-size: 16pt;
+            margin-bottom: 1.2em;
+            display: block;
+            color: #000;
+            text-decoration: underline;
+            text-underline-offset: 8px;
+        }
+
+        /* Section Numbering */
+        body {
+            counter-reset: section;
+        }
+
+        h2 {
+            counter-reset: subsection;
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            font-family: var(--title-font);
+            font-size: 24pt;
+            font-weight: 800;
+            border-bottom: 2px solid #000;
+            padding-bottom: 8px;
+            color: #000;
+        }
+
+        h2::before {
+            counter-increment: section;
+            content: counter(section) ". ";
+        }
+
+        h3 {
+            counter-reset: subsubsection;
+            margin-top: 1.8em;
+            margin-bottom: 0.7em;
+            font-family: var(--title-font);
+            font-size: 18pt;
+            font-weight: 700;
+            color: #000;
+        }
+
+        h3::before {
+            counter-increment: subsection;
+            content: counter(section) "." counter(subsection) " ";
+        }
+
+        .report-meta {
+            margin: 1em 0 2em 0;
+            padding: 15px;
+            border-left: 3px solid #000;
+            background: #f8fafc;
+            font-family: var(--mono-font);
+            font-size: 9pt;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        /* Findings Ledger - Neo-Brutalist Cards */
+        .findings-ledger {
+            margin: 3em 0;
+            border: none;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .finding-item {
+            padding: 25px 30px;
+            border: 3px solid #000;
+            background: #f8fafc;
+            box-shadow: 10px 10px 0px #000;
+            position: relative;
+        }
+
+        /* Randomize colors for cards - Slightly Darker Palette */
+        .finding-item:nth-child(3n+1) {
+            background: #a5b4fc;
+        }
+
+        /* Indigo */
+        .finding-item:nth-child(3n+2) {
+            background: #6ee7b7;
+        }
+
+        /* Emerald */
+        .finding-item:nth-child(3n+3) {
+            background: #fcd34d;
+        }
+
+        /* Amber */
+
+        .finding-header {
+            display: block;
+            font-family: var(--title-font);
+            font-weight: 800;
+            font-size: 13pt;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .finding-content {
+            font-size: 11pt;
+            color: #1e293b;
+            line-height: 1.6;
+            text-align: justify;
+            margin: 0;
+            display: block;
+        }
+
+        /* Jira Evidence Gallery - Full Width Optimization */
+        .jira-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin: 3em 0;
+            width: 100%;
+        }
+
+        .jira-box {
+            width: 100%;
+            border: 3px solid #000;
+            padding: 0;
+            background: #fff;
+            box-shadow: 16px 16px 0px #000;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .jira-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 3px solid #000;
+        }
+
+        .jira-label {
+            margin: 0;
+            padding: 15px;
+            font-family: var(--mono-font);
+            font-size: 10pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000;
+            text-align: center;
+            background: #f8fafc;
+        }
+
+        /* Academic Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 10.5pt;
+            border-top: 2px solid #0f172a;
+            border-bottom: 2px solid #0f172a;
+        }
+
+        th {
+            padding: 12px 10px;
+            border-bottom: 1.5px solid #0f172a;
+            text-align: left;
+            font-weight: 700;
+            background-color: #f8fafc;
+            text-transform: uppercase;
+            font-size: 9pt;
+            color: #1e293b;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 0.5px solid #e2e8f0;
+            color: #334155;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Diagrams - Neo-Brutalist Style */
+        .figure {
+            margin: 4em 0;
+            text-align: center;
+            counter-increment: figure;
+            padding: 40px;
+            background: #ffffff;
+            border: 3px solid #000;
+            border-radius: 0;
+            box-shadow: 16px 16px 0px #000;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .mermaid {
+            display: inline-block;
+            width: 100%;
+            min-width: 1000px;
+            background: transparent;
+        }
+
+        .caption {
+            display: block;
+            margin-top: 1.5em;
+            font-size: 10.5pt;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .caption::before {
+            font-weight: 700;
+            content: "Figure " counter(figure) ": ";
+            color: #0f172a;
+        }
+
+        .figure {
+            counter-increment: figure;
+        }
+
+        /* User Story Detail Cards */
+        .us-card {
+            margin: 1.5em 0;
+            padding: 20px 25px;
+            background: #ffffff;
+            border: 1.5px solid #000;
+            font-size: 11pt;
+            border-radius: 0;
+            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.05);
+        }
+
+        .us-title {
+            font-weight: 700;
+            font-family: var(--mono-font);
+            font-size: 9.5pt;
+            color: #000;
+            display: block;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+        }
+
+        .us-priority {
+            float: right;
+            font-size: 8pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border: 1px solid #000;
+            border-radius: 0;
+            letter-spacing: 1px;
+        }
+
+        .priority-must {
+            background: #000;
+            color: #fff;
+        }
+
+        .priority-should {
+            background: #eee;
+            color: #000;
+        }
+
+        .priority-could {
+            background: #fff;
+            color: #000;
+            border: 1px dashed #000;
+        }
+
+        .ac-list {
+            margin-top: 15px;
+            padding-left: 20px;
+            list-style-type: square;
+            font-size: 10pt;
+            color: #333;
+        }
+
+
+        .callout {
+            padding: 20px 30px;
+            margin: 2.5em 0;
+            background: #fcfcfc;
+            border: 1.5px solid #000;
+            font-size: 11pt;
+            border-radius: 0;
+            color: #000;
+            font-style: italic;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 9.5pt;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .paper {
+                box-shadow: none;
+                width: 100%;
+                margin: 0;
+                padding: 15mm;
+            }
+
+            .jira-box img {
+                height: auto;
+            }
+
+            section {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="paper">
+        <!-- HEADER -->
+        <div class="title-block">
+            <div class="logo-container">
+                <img src="assets/flowra_logo.png" alt="Flowra Logo">
+            </div>
+            <span class="subtitle">Software Engineering Phase 1 Submission</span>
+            <h1>Flowra: Agentic Agile Orchestration</h1>
+            <p
+                style="text-align: center; font-size: 14pt; color: #333; max-width: 900px; margin: 0 auto; line-height: 1.6; font-weight: 500;">
+                Bridging the gap between team communication, codebase activity, and project management through
+                intelligent verification and approval-first synchronization.
+            </p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <span class="member-name">Muhammad Faizan Anwar</span>
+                    <span class="member-role">Lead Developer</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Muhammad Waleed</span>
+                    <span class="member-role">Product Manager / Owner</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Furqan Basra</span>
+                    <span class="member-role">Scrum Master</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Zarsham Waleed</span>
+                    <span class="member-role">QA Engineer</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Haleema Imran</span>
+                    <span class="member-role">UI/UX Designer</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Muhammad Anas</span>
+                    <span class="member-role">Documentation Lead</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="abstract">
+            <span class="abstract-title">Project Overview</span>
+            <p>Our team developed <strong>Flowra</strong> to tackle a major headache in Agile software development: the
+                gap between what's happening in the code and what the Jira board actually shows. Most developers find it
+                a chore to manually update tickets, so the board ends up being out of sync. Flowra solves this by
+                listening to team chat (like Discord or Slack) for status updates, verifying that work against real
+                GitHub commits, and then asking the PM for a quick approval to move the card. This report breaks down
+                our research, the gaps we found in existing tools, and the full set of requirements we've defined for
+                the project.</p>
+        </div>
+
+        <div class="report-meta">
+            <p
+                style="margin-bottom: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; font-size: 9pt;">
+                Phase 1 Role Distribution & Academic Accountability:</p>
+            <table style="border: none; margin: 0; font-size: 9pt; width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #e2e8f0; background: transparent;">
+                    <td style="width: 220px; padding: 10px 0; border: none;"><strong>Muhammad Waleed</strong></td>
+                    <td style="border: none; padding: 10px 0; line-height: 1.4; color: #334155;"><strong>Product
+                            Owner:</strong> Defined core features, made final product decisions, and maintained overall
+                        project vision.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0; background: transparent;">
+                    <td style="padding: 10px 0; border: none;"><strong>Furqan Ahmad Basra</strong></td>
+                    <td style="border: none; padding: 10px 0; line-height: 1.4; color: #334155;"><strong>Scrum Master &
+                            Analyst:</strong> Managed meetings and task tracking. Conducted comparative analysis and
+                        competitor workflow reporting.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0; background: transparent;">
+                    <td style="padding: 10px 0; border: none;"><strong>Muhammad Faizan Anwar</strong></td>
+                    <td style="border: none; padding: 10px 0; line-height: 1.4; color: #334155;"><strong>Requirement
+                            Lead (Interview):</strong> Conducted stakeholder interviews, prepared technical scripts, and
+                        handled transcription.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0; background: transparent;">
+                    <td style="padding: 10px 0; border: none;"><strong>Haleema Imran</strong></td>
+                    <td style="border: none; padding: 10px 0; line-height: 1.4; color: #334155;"><strong>Requirement
+                            Lead (Survey):</strong> Designed and distributed the user questionnaire, analyzed responses,
+                        and summarized findings.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0; background: transparent;">
+                    <td style="padding: 10px 0; border: none;"><strong>Zarsham Waleed</strong></td>
+                    <td style="border: none; padding: 10px 0; line-height: 1.4; color: #334155;"><strong>Jira
+                            Engineer:</strong> Translated findings into user stories on Jira with acceptance criteria
+                        and MoSCoW prioritization.</td>
+                </tr>
+                <tr style="border: none; background: transparent;">
+                    <td style="padding: 10px 0; border: none;"><strong>Muhammad Anas Hashmi</strong></td>
+                    <td style="border: none; padding: 10px 0; line-height: 1.4; color: #334155;"><strong>Documentation
+                            Lead:</strong> Compiled the master SRS document and defined functional requirement
+                        specifications.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SECTION 1 -->
+        <h2>System Scope and Definition</h2>
+
+        <h3>The Challenges We're Tackling</h3>
+        <div class="findings-ledger">
+            <div class="finding-item">
+                <span class="finding-header">Problem 1: The Manual Update Chore</span>
+                <p class="finding-content">In the middle of a sprint, developers often forget to drag their Jira cards.
+                    The friction of switching from coding to a browser just to update a ticket creates a "lagging
+                    reality" where the board doesn't match the actual codebase. We're removing this manual step.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Problem 2: Automation without Evidence</span>
+                <p class="finding-content">Current automation is too simple it just looks at branch names. It doesn't
+                    actually check if the code address the ticket. Flowra adds a verification layer to make sure a task
+                    is truly finished before suggesting a move.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Problem 3: The "Invisible" Contributors</span>
+                <p class="finding-content">Tools like LinearB are great for coders but ignore QA testers and PMs. Since
+                    they aren't pushing code to GitHub, their effort often goes unmeasured. Flowra tracks signals from
+                    every role to give a fairer view of team performance.</p>
+            </div>
+        </div>
+
+        <h3>Our Integrated Solution</h3>
+        <p>Flowra fixes these issues by bridging the gap between how a team talks, how they code, and how they manage
+            their board. It creates a single, verified pipeline that keeps everyone in sync without the manual overhead.
+        </p>
+
+        <div class="figure">
+            <div class="mermaid">
+                flowchart TD
+                A[Team Communication\nDiscord · Slack · Telegram] --> B[Orchestration Layer\nSignal Listener & NLP]
+                C[Version Control\nCommits · PRs · Branches] --> B
+                B --> D[Flowra Core Engine\nVerification & Correlation Logic]
+                D --> E{Approval-First Sync\nPM Dashboard}
+                E -- Approved --> F[Jira Board\nAutomatic Update]
+                E -- Rejected --> G[Flagged for Review]
+                D --> H[Performance Analytics\nAll Roles · All Metrics]
+            </div>
+            <span class="caption">System Data Flow and Orchestration Logic.</span>
+        </div>
+
+        <h3>System Boundaries</h3>
+        <div class="figure">
+            <div class="mermaid">
+                graph LR
+                subgraph External Systems
+                G[GitHub / GitLab]
+                J[Jira]
+                D[Discord]
+                S[Slack]
+                T[Telegram]
+                end
+                subgraph Flowra System Boundary
+                OC[Orchestration Layer]
+                FE[Flowra Core Engine]
+                FW[Flowra Dashboard]
+                end
+                G --> OC
+                D --> OC
+                OC --> FE
+                FE --> J
+                FE --> FW
+            </div>
+            <span class="caption">Context Model and External System Integration Boundaries.</span>
+        </div>
+
+        <!-- SECTION 2 -->
+        <h2>Requirement Proofs</h2>
+        <p>This section provides the raw evidence and documentation verifying our requirement elicitation process. Our
+            primary evidence consists of an industrial interview, a broad-scale user survey, and a technical comparative
+            analysis.</p>
+
+        <h3>Industrial Stakeholder Interview</h3>
+        <p>On <strong>April 20th, 2026</strong>, from <strong>7:00 PM to 7:37 PM</strong>, we conducted a formal
+            requirement elicitation session with an industry expert to validate Flowra's value proposition in
+            professional environments.</p>
+
+        <div class="callout">
+            <strong>Stakeholder Profile: Tanguy De Branbandre</strong><br>
+            Tanguy is the <strong>CEO of LYTE Studios</strong> and a seasoned tech leader with extensive experience as a
+            Senior Backend and Flutter Developer. He has successfully spearheaded and managed high-scale projects
+            including <strong>Fixie, Tinrate, Jobr, and Werkr</strong>. His dual perspective as both a founder/CEO and a
+            deep technical contributor provided invaluable insights into the friction between development speed and
+            administrative accuracy.
+        </div>
+
+        <div class="findings-ledger">
+            <div class="finding-item">
+                <span class="finding-header">Industrial Bottleneck: The Manual Follow-up Cycle</span>
+                <p class="finding-content">Tanguy verified that professional project management is currently plagued by
+                    the "Manual Follow-up" cycle. Managers spend a disproportionate amount of time verifying if verbal
+                    claims in communication channels (Slack/Discord) accurately match the reality of the codebase and
+                    Jira boards.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Systemic Risk: AI Hallucination in Orchestration</span>
+                <p class="finding-content">The stakeholder emphasized that autonomous agents in Agile management are a
+                    liability without a "Proof of Work" verification engine. For Flowra to succeed in professional
+                    environments, it must cross-reference chat signals with GitHub commits to ensure veracity.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Architecture Mandate: Approval-First Logic</span>
+                <p class="finding-content">A critical outcome of the session was the validation of the human-in-the-loop
+                    requirement. For enterprise-grade adoption, the stakeholder agreed that an "Approve" gate is
+                    mandatory to maintain board integrity and build initial user trust.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Innovation Path: Automated Risk Intelligence</span>
+                <p class="finding-content">The stakeholder suggested that Flowra's long-term competitive advantage lies
+                    in "Risk Intelligence" automatically identifying security leaks, performance regressions, and
+                    architectural bottlenecks during the orchestration process.</p>
+            </div>
+        </div>
+
+        <div class="evidence-links" style="margin-top: 2em; padding-top: 1.5em; border-top: 1.5px solid #000;">
+            <p
+                style="font-family: var(--mono-font); font-size: 9pt; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 1em;">
+                Requirement Documentation Evidence:</p>
+            <p style="font-size: 11pt; line-height: 1.8;">
+                [Reference] <strong>Primary Interview Recording:</strong> <a
+                    href="https://drive.google.com/file/d/1ts_KpKQ1sSobvANIeXNcyr2BoMLHs4yj/view?usp=sharing">Archive
+                    Repository Link</a><br>
+                [Reference] <strong>Full Technical Transcript:</strong> <a
+                    href="https://drive.google.com/file/d/1deOCLmS4A05eaIaed9GSmT6v-9jDIyf9/view?usp=sharing">Professional
+                    PDF Documentation</a>
+            </p>
+        </div>
+
+        <h3>User Discovery Survey (Quantitative Data Analysis)</h3>
+        <p>To validate the broader market need, we conducted a quantitative survey titled <strong>"Stop Updating Jira
+                Manually"</strong> targeting software engineering students and early-career professionals. With 100+
+            responses, the data provides a statistically significant foundation for Flowra's core features.</p>
+
+        <div class="figure">
+            <div class="mermaid">
+                pie title Primary Communication Channels Used by Teams
+                "Discord" : 45
+                "WhatsApp" : 25
+                "Slack" : 20
+                "Telegram" : 10
+            </div>
+            <span class="caption">Survey Data: Dominant Communication Platforms in Student Dev Groups.</span>
+        </div>
+
+        <div class="findings-ledger">
+            <div class="finding-item">
+                <span class="finding-header">Segment 1: Baseline Tooling (Vibe Check)</span>
+                <p class="finding-content">The survey identified that while Jira and GitHub Projects are the primary
+                    board tools, team communication is fragmented across Discord (45%) and WhatsApp (25%). This confirms
+                    the need for Flowra's multi-platform "Signal Listener" architecture.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Segment 2: Current Workflow Gaps (The Pain)</span>
+                <p class="finding-content">Users reported a <strong>4.2/5 frustration level</strong> with manual board
+                    updates. Most respondents (85%) admitted the project board is a <em>"web of lies"</em> that they
+                    only fix right before standup. Non-developers (QA/Marketing) rated their work visibility at a low
+                    1.8/5, validating the need for role-inclusive metrics.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Segment 3: Feature Validation (The Flowra Fix)</span>
+                <p class="finding-content">The concept of AI listening to chat was met with high excitement (90%
+                    approval), though users emphasized the <strong>human-in-the-loop gate</strong> as "crucial" (74%).
+                    Users overwhelmingly agreed that tracking documentation and UI work would lead to a fairer grading
+                    and evaluation system.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Segment 4: Efficiency Outlook (The Wildcard)</span>
+                <p class="finding-content">Respondents estimated a <strong>45-60% increase in team efficiency</strong>
+                    if board updates were automated with a single-click approval. The general "vibe" of current project
+                    management was described as <em>"held together by duct tape and a gram of trust."</em></p>
+            </div>
+        </div>
+
+        <div class="evidence-links" style="margin-top: 2em; padding-top: 1.5em; border-top: 1.5px solid #000;">
+            <p
+                style="font-family: var(--mono-font); font-size: 9pt; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 1em;">
+                Survey Documentation Evidence:</p>
+            <p style="font-size: 11pt; line-height: 1.8;">
+                [Reference] <strong>Primary Survey Instrument:</strong> <a
+                    href="https://forms.gle/qcPJZUgfk7o6YhMb9">Google Forms Live Document</a><br>
+                [Reference] <strong>Raw Data Responses:</strong> Available in Project Appendix (CSV Export)
+            </p>
+        </div>
+
+        <h3>Comparative Technical Analysis (Industrial Audit)</h3>
+        <div class="report-meta">
+            <span>Comparative Analysis Report</span><br>
+            <span>Document Analysis Method | Requirement Gathering Phase</span><br>
+            <span>Project: Flowra | Group 3, Section C | April 2026</span>
+        </div>
+
+        <h4>2.3.1 Our Goal with This Research</h4>
+        <p>We wanted to see how existing tools handle Agile workflows and where they fail. We looked at four popular
+            systems that each tackle the problem differently: Jira (the classic), LinearB (for metrics), Zapier (for DIY
+            automation), and Notion AI (for documentation). Our goal was to find exactly what's missing in the market so
+            we could build Flowra to fill those gaps.</p>
+
+        <h4>2.3.2 How We Approached the Analysis</h4>
+        <p>We reviewed official documentation, product feature pages, and publicly available workflow guides for each
+            system. We evaluated each system against six questions that are directly relevant to what Flowra is trying
+            to do:</p>
+        <ul>
+            <li>Does it move Jira cards automatically based on real developer activity, or does someone still have to do
+                it manually?</li>
+            <li>Does it verify that the work was actually done before moving a card, or does it trust a branch name and
+                call it done?</li>
+            <li>Can it listen to Discord, Slack, and Telegram at the same time and understand what is being said?</li>
+            <li>Is there a step where a human reviews and approves a suggested change before it hits Jira?</li>
+            <li>Does it track the performance of non-developer roles like marketing, QA, or project management?</li>
+            <li>How much effort does it realistically take to set up and maintain for a small team?</li>
+        </ul>
+
+        <h4>2.3.3 Detailed Audit Findings</h4>
+        <div class="findings-ledger">
+            <div class="finding-item">
+                <span class="finding-header">Tool A: Jira Software</span>
+                <p class="finding-content">Jira is pretty much the industry standard, and for good reason. It handles
+                    the basics like Kanban boards and sprint tracking perfectly. We really liked its built-in automation
+                    engine because it's so flexible you can tell it to move a card when a PR is opened, which is a great
+                    start.</p>
+                <p class="finding-content" style="margin-top:10px;"><strong>What we found:</strong> While the automation
+                    is powerful, it's also "blind." It doesn't actually understand if the code in the PR is any good; it
+                    just sees an event and reacts. This leads to the board getting cluttered with "done" cards that
+                    aren't actually finished.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Tool B: LinearB</span>
+                <p class="finding-content">LinearB is great for engineering managers who love data. It pulls metrics
+                    like cycle time and PR throughput straight from Git, which is awesome for seeing how fast a team is
+                    moving.</p>
+                <p class="finding-content" style="margin-top:10px;"><strong>What we found:</strong> The biggest issue we
+                    saw is that it completely ignores anyone who isn't writing code. If you're a QA tester or a PM, you
+                    basically don't exist in LinearB's eyes. Also, it doesn't "listen" to the team chat where most of
+                    the decisions actually happen.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Tool C: Zapier + GitHub + Slack</span>
+                <p class="finding-content">We looked at this as a DIY alternative. You can basically stitch together
+                    your own automation using webhooks between GitHub and Slack.</p>
+                <p class="finding-content" style="margin-top:10px;"><strong>What we found:</strong> It's just too
+                    fragile. If a developer changes a branch naming convention, the whole thing breaks. Plus, you have
+                    to build and maintain every single integration yourself, which is a massive headache for a small
+                    team.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">Tool D: Notion AI</span>
+                <p class="finding-content">Notion has been adding a lot of AI features lately, mostly for summarizing
+                    notes and drafting documents.</p>
+                <p class="finding-content" style="margin-top:10px;"><strong>What we found:</strong> It's great for
+                    documentation, but it's not a workflow tool. It has no idea what's happening in Git or Jira. It can
+                    summarize a meeting, but it can't actually move the project forward based on real work evidence.</p>
+            </div>
+        </div>
+
+        <h4>2.3.4 Side-by-Side Comparison Matrix</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Jira</th>
+                    <th>LinearB</th>
+                    <th>Zapier Stack</th>
+                    <th>Notion AI</th>
+                    <th>Flowra (Planned)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Automated card movement</td>
+                    <td>Partial</td>
+                    <td>Partial</td>
+                    <td>Partial</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Listens to chat across platforms</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Partial</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Verifies chat against code</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Approval step before Jira sync</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Developer analytics</td>
+                    <td>Partial</td>
+                    <td>Full</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Analytics for non-developer roles</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Natural language understanding</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Partial</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Sprint velocity tracking</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Easy setup for small teams</td>
+                    <td>Partial</td>
+                    <td>None</td>
+                    <td>Partial</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h4>2.3.5 The Five Gaps We're Filling</h4>
+        <div class="findings-ledger">
+            <div class="finding-item">
+                <span class="finding-header">1. Chat is a "Black Hole"</span>
+                <p class="finding-content">Teams talk about work all day on Discord and Slack, but none of that info
+                    ever makes it to Jira automatically. We're turning those "I'm done" messages into real triggers.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">2. Blind Automation</span>
+                <p class="finding-content">Most tools move cards just because a branch was created. They don't actually
+                    understand the code. Flowra double-checks the GitHub activity to make sure the work was actually
+                    done.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">3. Lack of Human Oversight</span>
+                <p class="finding-content">Current automation often messes up the board because it happens too fast
+                    without a check. We've built an "Approval-First" model so the PM stays in control.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">4. Non-Coders are Left Out</span>
+                <p class="finding-content">If you aren't writing code, current tools basically ignore you. We're
+                    tracking metrics for QA and PM roles so everyone's contribution is visible.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">5. Platform Fragmentation</span>
+                <p class="finding-content">Switching between Slack, GitHub, and Jira is where the friction happens.
+                    Flowra bridges all these platforms into one unified workflow.</p>
+            </div>
+        </div>
+
+        <h4>2.3.6 Industrial Synthesis</h4>
+        <p>Looking at everything together, Flowra is trying to fill a gap that none of these tools address: the
+            connection between what a team communicates, what they actually produce in code, and what their project
+            board reflects. Keeping OpenClaw, the Flowra Engine, and the Web App as separate joined layers is the only
+            practical way to build something that can actually do all of these things reliably.</p>
+
+        <div class="evidence-links" style="margin-top: 2em; padding-top: 1.5em; border-top: 1.5px solid #000;">
+            <p
+                style="font-family: var(--mono-font); font-size: 9pt; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 1em;">
+                Analysis Sources & References:</p>
+            <p style="font-size: 10pt; line-height: 1.6; color: #64748b;">
+                • Atlassian Jira Software Documentation (https://support.atlassian.com/jira-software-cloud/)<br>
+                • LinearB Platform Features & WorkerB Reference (https://linearb.io/platform)<br>
+                • Zapier GitHub & Jira Integration Guide (https://zapier.com/apps/github/integrations/jira)<br>
+                • Notion AI Feature Capabilities (https://www.notion.so/product/ai)<br>
+                • Atlassian State of Teams Report 2023.
+            </p>
+        </div>
+        <!-- SECTION 3 -->
+        <h2>Jira Implementation</h2>
+        <p>This section provides high-fidelity visual evidence of our project implementation within Jira Software Cloud.
+            Each screenshot represents a critical component of our Agile workflow orchestration, from backlog grooming
+            to role-specific requirement mapping.</p>
+
+        <div class="jira-gallery">
+            <div class="jira-box">
+                <img src="jirascreenshotsProduct manager/1.png" alt="Product Backlog">
+                <div class="jira-label">Ref-PM-01: Consolidated Product Backlog</div>
+            </div>
+            <div class="jira-box">
+                <img src="jirascreenshotsProduct manager/2.png" alt="Active Sprint Board">
+                <div class="jira-label">Ref-PM-02: Active Sprint Board (Kanban Orchestration)</div>
+            </div>
+            <div class="jira-box">
+                <img src="developerjira user stories/1.png" alt="Developer User Story">
+                <div class="jira-label">Ref-DEV-01: Developer Story with Technical AC</div>
+            </div>
+            <div class="jira-box">
+                <img src="qatester user stories/1.png" alt="QA Bug Story">
+                <div class="jira-label">Ref-QA-01: QA/Bug Tracking Story Mapping</div>
+            </div>
+        </div>
+
+
+        <!-- SECTION 4 -->
+        <h2>Requirement Gathering Methodology</h2>
+        <p>Our elicitation process integrated three distinct methods: a mandatory semi-structured interview, a user
+            discovery survey (100+ respondents), and a technical comparative document analysis. This triangulated
+            approach ensures that Flowra addresses both high-level industrial needs and ground-level user frustrations.
+        </p>
+
+        <h3>Semi-Structured Stakeholder Interview</h3>
+        <p>A 36-minute session was conducted with <strong>Tanguy De Branbandre</strong> (CEO, LYTE Studios). The
+            interview focused on the feasibility of AI-driven board orchestration and the critical need for verification
+            layers in professional development environments.</p>
+
+        <div class="callout">
+            <strong>Technical Note:</strong> Due to a technical error resulting in silent audio, the original vocal
+            recording was manually reconstructed from extensive meeting notes to accurately preserve the insights shared
+            during the session.
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Outcome Theme</th>
+                    <th>Key Findings and Validations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Problem Validation</td>
+                    <td>Confirmed manual tracking as a recognized multi-billion dollar friction point across all team
+                        sizes.</td>
+                </tr>
+                <tr>
+                    <td>Risk Mitigation</td>
+                    <td>Identified that AI-assisted task tracking must be checked by a verification engine to prevent
+                        "hallucinations."</td>
+                </tr>
+                <tr>
+                    <td>Approval Workflow</td>
+                    <td>Validated "Approval-First Sync" as the essential approach for initial trust-building in the
+                        industry.</td>
+                </tr>
+                <tr>
+                    <td>Expansion Areas</td>
+                    <td>Suggested future growth into "Risk Intelligence" and bottleneck prediction rather than just
+                        automation.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>User Discovery Survey (Data Analysis)</h3>
+        <p>We surveyed 100+ software engineering students and young professionals. The results confirmed a systemic
+            failure in current Agile tooling to keep boards synchronized with actual progress.</p>
+
+        <div class="figure">
+            <div class="mermaid">
+                pie title "How often do you forget to update Jira?"
+                "Constantly (Web of Lies)" : 35
+                "Sometimes (Before Standup)" : 50
+                "Never (Agile God)" : 15
+            </div>
+            <span class="caption">Frequency of manual board synchronization failure among surveyed users.</span>
+        </div>
+
+        <p><strong>Critical Survey Insights:</strong></p>
+        <ul>
+            <li><strong>Addressing "Git Bias":</strong> A major theme emerged regarding the "unfairness" of traditional
+                metrics. Respondents noted that the <em>"Git contribution graph is a scam"</em> that favors backend
+                developers while making PMs and Documentation Leads appear unproductive. 94% agreed that Flowra's
+                multi-role tracking (Docs, UI, Bugs) is a fairer way to evaluate team contributions.</li>
+            <li><strong>The "Chat Void":</strong> 70% of respondents reported that when a task is marked "done" in chat
+                (WhatsApp/Discord/Slack), it either gets lost or requires a high-friction manual update in Jira later.
+            </li>
+            <li><strong>Human-in-the-Loop:</strong> Despite high frustration, 92% of users demanded a human "Approve"
+                gate, stating they do not trust AI to modify the board state unsupervised.</li>
+        </ul>
+
+
+
+        <!-- SECTION 4 -->
+        <h2>Stakeholder Analysis</h2>
+        <div class="figure">
+            <div class="mermaid">
+                quadrantChart
+                title Stakeholder Analysis Interest vs Influence
+                x-axis Low Interest --> High Interest
+                y-axis Low Influence --> High Influence
+                quadrant-1 Manage Closely
+                quadrant-2 Keep Satisfied
+                quadrant-3 Monitor
+                quadrant-4 Keep Informed
+                Product Manager: [0.85, 0.90]
+                Developer: [0.80, 0.60]
+                QA Engineer: [0.70, 0.45]
+                System Admin: [0.45, 0.70]
+                Team Lead: [0.60, 0.85]
+                Marketing: [0.50, 0.30]
+            </div>
+            <span class="caption">Stakeholder Interest vs. Influence Matrix.</span>
+        </div>
+
+        <!-- SECTION 5 -->
+        <h2>Software Requirements Specification (SRS)</h2>
+
+        <h3>Why we wrote this SRS</h3>
+        <p>This document lists out everything Flowra needs to do to be successful. We wrote it to keep ourselves on
+            track during development and to give our evaluators a clear look at what we're building. It covers both the
+            features we're building and the quality standards we're aiming for.</p>
+
+        <table style="font-size: 10pt;">
+            <thead>
+                <tr>
+                    <th>Audience</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Development Team</td>
+                    <td>Implementation reference and feature scope</td>
+                </tr>
+                <tr>
+                    <td>Project Manager</td>
+                    <td>Sprint planning and backlog prioritization</td>
+                </tr>
+                <tr>
+                    <td>Course Evaluators</td>
+                    <td>Assessment of Phase 1 requirements gathering</td>
+                </tr>
+                <tr>
+                    <td>QA Engineers</td>
+                    <td>Test case derivation and acceptance criteria</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Definitions and Acronyms</h3>
+        <table style="font-size: 10pt;">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Flowra</strong></td>
+                    <td>The AI orchestration platform being developed.</td>
+                </tr>
+                <tr>
+                    <td><strong>Orchestration Layer</strong></td>
+                    <td>The agentic signal-listening component within the Flowra ecosystem.</td>
+                </tr>
+                <tr>
+                    <td><strong>Signal</strong></td>
+                    <td>A meaningful developer communication event (e.g., "I finished the auth feature").</td>
+                </tr>
+                <tr>
+                    <td><strong>Proof of Work</strong></td>
+                    <td>Verified evidence in version control that a stated task was actually completed.</td>
+                </tr>
+                <tr>
+                    <td><strong>Approval-First Sync</strong></td>
+                    <td>The workflow where Flowra waits for PM approval before executing a Jira update.</td>
+                </tr>
+                <tr>
+                    <td><strong>MoSCoW</strong></td>
+                    <td>Must Have, Should Have, Could Have, Won't Have prioritization.</td>
+                </tr>
+                <tr>
+                    <td><strong>NLP</strong></td>
+                    <td>Natural Language Processing for signal interpretation.</td>
+                </tr>
+                <tr>
+                    <td><strong>PR / Commit</strong></td>
+                    <td>Pull Request and individual code changes in GitHub.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Functional Requirements: User Stories</h3>
+
+        <h4>5.1.1 Product Manager Stories</h4>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-PM-01 Dashboard Overview</span>
+            As a <strong>Product Manager</strong>, I want to see a real-time dashboard of sprint progress, velocity, and
+            blockers in one view.
+            <ul class="ac-list">
+                <li>Loads within 3 seconds; auto-refreshes every 60s.</li>
+                <li>Displays pending approval queue prominently.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-PM-02 Approval-First Sync Gate</span>
+            As a <strong>Product Manager</strong>, I want to review AI-suggested transitions before they are applied to
+            Jira.
+            <ul class="ac-list">
+                <li>Show Jira ticket, chat message, and GitHub evidence in the review card.</li>
+                <li>One-click approval triggers Jira API; rejection logs the reason.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-should">Should</span>
+            <span class="us-title">US-PM-03 Team Performance Analytics</span>
+            As a <strong>Product Manager</strong>, I want to see metrics for all roles (Dev, QA, PM) based on
+            communication and code.
+            <ul class="ac-list">
+                <li>Aggregate metrics from Jira, GitHub, and Discord into a single table.</li>
+                <li>Filter metrics by sprint or individual team member.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-should">Should</span>
+            <span class="us-title">US-PM-04 Bottleneck Detection</span>
+            As a <strong>Product Manager</strong>, I want Flowra to flag cards stuck in one state for >3 days as
+            bottlenecks.
+            <ul class="ac-list">
+                <li>Automatic visual flag (red highlight) on cards exceeding aging threshold.</li>
+                <li>Send a "Stuck Ticket" notification to the project coordination channel.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-PM-05 Integration Setup</span>
+            As a <strong>Project Lead</strong>, I want a guided interface to connect GitHub, Jira, and Discord bots.
+            <ul class="ac-list">
+                <li>Success confirmation for each API connection.</li>
+                <li>Encrypted storage of all OAuth tokens and secret keys.</li>
+            </ul>
+        </div>
+
+        <h4>5.1.2 Developer Stories</h4>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-DEV-01 Zero-Friction Signal Detection</span>
+            As a <strong>Developer</strong>, I want my "pushed auth fix" messages in chat to trigger Jira suggestions
+            automatically.
+            <ul class="ac-list">
+                <li>Detect >85% of common "done" phrases without strict formatting.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-DEV-02 Proof of Work Verification</span>
+            As a <strong>Developer</strong>, I want Flowra to verify my claims against GitHub commits before suggesting
+            a Jira move.
+            <ul class="ac-list">
+                <li>Verify commit branch, author, and timestamp matches the Jira assignee.</li>
+                <li>Reference specific commit SHAs in the approval suggestion card.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-could">Could</span>
+            <span class="us-title">US-DEV-03 Personal Metric Profile</span>
+            As a <strong>Developer</strong>, I want to see my own contribution trends on a private dashboard.
+            <ul class="ac-list">
+                <li>Private view accessible only via developer's authenticated profile.</li>
+                <li>Display "Signals Detected" vs "Approved Suggestions" ratio.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-should">Should</span>
+            <span class="us-title">US-DEV-04 Status Notifications</span>
+            As a <strong>Developer</strong>, I want a chat notification when my work suggestion is approved by the PM.
+            <ul class="ac-list">
+                <li>Real-time notification in the channel where the signal was detected.</li>
+                <li>Link directly to the updated Jira ticket in the message.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-DEV-05 Automatic PR Linking</span>
+            As a <strong>Developer</strong>, I want Flowra to link PRs to Jira tickets based on context, not just issue
+            keys.
+            <ul class="ac-list">
+                <li>Successfully link PRs where descriptions mention task-relevant keywords.</li>
+                <li>Ensure linked PR data is visible in the PM approval dashboard.</li>
+            </ul>
+        </div>
+
+        <h4>5.1.3 QA Tester Stories</h4>
+        <div class="us-card">
+            <span class="us-priority priority-must">Must</span>
+            <span class="us-title">US-QA-01 Bug Report Tracking</span>
+            As a <strong>QA Tester</strong>, I want my Jira bug reports to be automatically tracked as part of my
+            performance.
+            <ul class="ac-list">
+                <li>Detect 'bug' issue types created by the user in Jira.</li>
+                <li>Weight bug detection as a positive contribution in performance metrics.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-should">Should</span>
+            <span class="us-title">US-QA-02 Test Coverage Visibility</span>
+            As a <strong>QA Tester</strong>, I want to track test case execution against sprint tickets in Flowra.
+            <ul class="ac-list">
+                <li>Show "Tests Passed/Failed" status in the ticket detail view.</li>
+                <li>Trigger a "Ready for Verification" signal when tests pass.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-could">Could</span>
+            <span class="us-title">US-QA-03 Regression Risk Flagging</span>
+            As a <strong>QA Tester</strong>, I want Flowra to flag PRs touching historically buggy files as high risk.
+            <ul class="ac-list">
+                <li>Analyze last 3 months of bug data for file-level hot-spots.</li>
+                <li>Attach a "High Regression Risk" warning to matching verification results.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-should">Should</span>
+            <span class="us-title">US-QA-04 Chat-Based Sign-Off</span>
+            As a <strong>QA Tester</strong>, I want my "verified" messages in chat to move tickets to Done (after PM
+            approval).
+            <ul class="ac-list">
+                <li>Detect "signed off" or "verified" intent from authorized QA users.</li>
+                <li>Require PM approval before final transition to 'Done'.</li>
+            </ul>
+        </div>
+        <div class="us-card">
+            <span class="us-priority priority-could">Could</span>
+            <span class="us-title">US-QA-05 Sprint Quality Report</span>
+            As a <strong>QA Tester</strong>, I want an auto-generated quality summary at the end of each sprint.
+            <ul class="ac-list">
+                <li>Summarize total bugs found vs resolved.</li>
+                <li>Calculate defect density based on sprint velocity.</li>
+            </ul>
+        </div>
+
+        <h3>Non-Functional Requirements</h3>
+        <div class="findings-ledger">
+            <div class="finding-item">
+                <span class="finding-header">5.3.1 Performance Constraints</span>
+                <table style="font-size: 10pt;">
+                    <tr>
+                        <td>Signal detection latency</td>
+                        <td>&lt; 30 seconds from message to suggestion creation</td>
+                    </tr>
+                    <tr>
+                        <td>Jira sync execution</td>
+                        <td>&lt; 5 seconds post-approval</td>
+                    </tr>
+                    <tr>
+                        <td>System uptime</td>
+                        <td>&ge; 99% during active sprint hours (06:00–24:00)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">5.3.2 Security & Compliance</span>
+                <table style="font-size: 10pt;">
+                    <tr>
+                        <td>Authentication</td>
+                        <td>OAuth 2.0 for GitHub, Jira, and Discord/Slack integrations</td>
+                    </tr>
+                    <tr>
+                        <td>Data Protection</td>
+                        <td>AES-256 encryption for stored credentials and session tokens</td>
+                    </tr>
+                    <tr>
+                        <td>Audit Logging</td>
+                        <td>All approval actions logged with timestamp, actor, and evidence</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="finding-item">
+                <span class="finding-header">5.3.3 Usability & Scalability</span>
+                <table style="font-size: 10pt;">
+                    <tr>
+                        <td>Approval UX</td>
+                        <td>PM review-to-action cycle &lt; 10 seconds per suggestion</td>
+                    </tr>
+                    <tr>
+                        <td>System Scalability</td>
+                        <td>Supports up to 50 concurrent active sprints</td>
+                    </tr>
+                    <tr>
+                        <td>Onboarding</td>
+                        <td>Project instance configuration completable in &lt; 15 minutes</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3>MoSCoW Prioritization</h3>
+        <p>Requirements are prioritized across four categories to ensure core functionality is delivered in Phase 1.
+            <em>Must Haves</em> are critical for system failure/success; <em>Should Haves</em> provide high value but
+            aren't blocking.
+        </p>
+
+        <div class="figure">
+            <div class="mermaid">
+                pie title Feature Count by MoSCoW Priority
+                "Must Have" : 7
+                "Should Have" : 5
+                "Could Have" : 4
+                "Won't Have" : 4
+            </div>
+            <span class="caption">MoSCoW Distribution: Balancing core orchestration with analytical value.</span>
+        </div>
+
+        <table style="font-size: 9.5pt;">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Role</th>
+                    <th>Priority</th>
+                    <th>Rationale</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Approval-First Dashboard</td>
+                    <td>PM</td>
+                    <td>Must</td>
+                    <td>Core differentiator; ensures board integrity.</td>
+                </tr>
+                <tr>
+                    <td>Jira Transition API</td>
+                    <td>PM</td>
+                    <td>Must</td>
+                    <td>Primary functional output of the system.</td>
+                </tr>
+                <tr>
+                    <td>Discord/Slack Signal Listen</td>
+                    <td>Sys</td>
+                    <td>Must</td>
+                    <td>Primary input source for signal extraction.</td>
+                </tr>
+                <tr>
+                    <td>GitHub Proof Verification</td>
+                    <td>Sys</td>
+                    <td>Must</td>
+                    <td>Defines Flowra as a verifier, not just an automator.</td>
+                </tr>
+                <tr>
+                    <td>QA Bug Tracking & Sign-off</td>
+                    <td>QA</td>
+                    <td>Must</td>
+                    <td>Required for 3-role coverage specification.</td>
+                </tr>
+                <tr>
+                    <td>Non-dev Analytics</td>
+                    <td>PM</td>
+                    <td>Should</td>
+                    <td>High demand from survey; addresses visibility gaps.</td>
+                </tr>
+                <tr>
+                    <td>Personal Metric Profiles</td>
+                    <td>DEV</td>
+                    <td>Could</td>
+                    <td>Useful UX but not blocking Phase 1 MVP.</td>
+                </tr>
+                <tr>
+                    <td>Regression Risk Flagging</td>
+                    <td>QA</td>
+                    <td>Could</td>
+                    <td>Innovative but technically complex; aspirational.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION 6 -->
+        <h2>System Architecture and UML</h2>
+
+        <h3>System Context Diagram</h3>
+        <p>This diagram shows how Flowra sits in the middle of everything. It visualizes how we connect the human team
+            members (like PMs and Devs) with the external tools they use every day (like Jira and Slack) through our
+            central orchestration engine.</p>
+        <div class="figure">
+            <div class="mermaid">
+                graph LR
+                classDef actor fill:#c084fc,stroke:#000,stroke-width:2px;
+                classDef system fill:#818cf8,stroke:#000,stroke-width:2px;
+                classDef external fill:#cbd5e1,stroke:#000,stroke-width:2px;
+
+                subgraph "External Actors"
+                U1[👤 Product Manager]:::actor
+                U2[👤 Developer]:::actor
+                U3[👤 QA Tester]:::actor
+                E1[GitHub / GitLab]:::external
+                E2[Atlassian Jira]:::external
+                E3[Discord]:::external
+                E4[Slack]:::external
+                E5[Telegram]:::external
+                end
+                subgraph FLOWRA ["⬛ Flowra System"]
+                F[Central\nOrchestration\nEngine]:::system
+                end
+                U1 -- "Approves suggestions\nViews analytics" --> FLOWRA
+                U2 -- "Work verified\nMetrics tracked" --> FLOWRA
+                U3 -- "Bug data tracked\nSign-offs detected" --> FLOWRA
+                E1 -- "Commits · PRs · Branches" --> FLOWRA
+                E2 -- "Read ticket state\nWrite transitions" --> FLOWRA
+                E3 -- "Team messages\nStandup signals" --> FLOWRA
+                E4 -- "Thread conversations\nDone signals" --> FLOWRA
+                E5 -- "Bot messages\nTask mentions" --> FLOWRA
+            </div>
+            <span class="caption">System Context Model: Defining boundaries between Flowra and external
+                stakeholders.</span>
+        </div>
+
+        <h3>Component Architecture</h3>
+        <p>We've broken Flowra down into three main parts: the listeners (which catch messages from Discord/Slack), the
+            core engine (where the logic lives), and the frontend dashboard (where the PM sees everything). This modular
+            design makes it easier for us to add more listeners in the future.</p>
+        <div class="figure">
+            <div class="mermaid">
+                graph TB
+                classDef ui fill:#818cf8,stroke:#000,stroke-width:2px;
+                classDef core fill:#34d399,stroke:#000,stroke-width:2px;
+                classDef listener fill:#fbbf24,stroke:#000,stroke-width:2px;
+                classDef external fill:#cbd5e1,stroke:#000,stroke-width:2px;
+
+                subgraph "Flowra Frontend"
+                UI[React Dashboard]:::ui
+                AUTH[Authentication Module]:::ui
+                CONF[Configuration Panel]:::ui
+                DASH[Analytics View]:::ui
+                APPR[Approval Queue UI]:::ui
+                end
+                subgraph "Flowra Core Backend"
+                API[REST API Layer]:::core
+                SIG[Signal Processor]:::core
+                VERIF[Verification Engine]:::core
+                SYNC[Jira Sync Service]:::core
+                ANAL[Analytics Engine]:::core
+                DB[(System Database)]:::core
+                end
+                subgraph "Orchestration Layer"
+                DISC[Discord Listener]:::listener
+                SLCK[Slack Listener]:::listener
+                TELG[Telegram Listener]:::listener
+                GH[Version Control Adapter]:::listener
+                end
+                subgraph "External Services"
+                JIRA[Atlassian Jira API]:::external
+                GHAPI[GitHub REST API]:::external
+                DAPI[Discord API]:::external
+                SAPI[Slack API]:::external
+                TAPI[Telegram Bot API]:::external
+                end
+                UI --> API
+                AUTH --> API
+                CONF --> API
+                DASH --> API
+                APPR --> API
+                API --> SIG
+                API --> VERIF
+                API --> SYNC
+                API --> ANAL
+                API --> DB
+                DISC --> SIG
+                SLCK --> SIG
+                TELG --> SIG
+                GH --> VERIF
+                SYNC --> JIRA
+                GH --> GHAPI
+                DISC --> DAPI
+                SLCK --> SAPI
+                TELG --> TAPI
+            </div>
+            <span class="caption">Logical Component Architecture and Subsystem Communication Flow.</span>
+        </div>
+
+        <h3>Technical Class Diagram</h3>
+        <p>The Class Diagram defines the data structures and relationships within the Flowra ecosystem. It models how a
+            <em>Signal</em> from chat produces a <em>VerificationResult</em>, which then triggers an
+            <em>ApprovalSuggestion</em> targeting a specific <em>Jira Task</em>.
+        </p>
+        <div class="figure" style="overflow-x: auto;">
+            <div class="mermaid">
+                classDiagram
+                class Project {
+                +String id
+                +String name
+                +String jiraProjectKey
+                +List~Integration~ integrations
+                +List~Sprint~ sprints
+                +connect()
+                +disconnect()
+                +getActiveSprint()
+                }
+
+                class Sprint {
+                +String id
+                +String name
+                +Date startDate
+                +Date endDate
+                +int totalStoryPoints
+                +int completedPoints
+                +getVelocity()
+                +getBottlenecks()
+                }
+
+                class Signal {
+                +String id
+                +String rawMessage
+                +String channelSource
+                +String detectedIntent
+                +Float confidenceScore
+                +DateTime detectedAt
+                +TeamMember sender
+                +Task relatedTask
+                +extract()
+                +matchToTask()
+                }
+
+                class VerificationResult {
+                +String signalId
+                +Boolean passed
+                +List~Commit~ supportingCommits
+                +List~PullRequest~ supportingPRs
+                +String failureReason
+                +verify()
+                }
+
+                class ApprovalSuggestion {
+                +String id
+                +Signal signal
+                +VerificationResult verification
+                +Task jiraTask
+                +String suggestedTransition
+                +String status
+                +approve()
+                +reject(reason: String)
+                }
+
+                class TeamMember {
+                +String id
+                +String name
+                +String role
+                +String githubUsername
+                +String slackId
+                +String discordId
+                +getMetrics(sprintId)
+                }
+
+                class Task {
+                +String jiraKey
+                +String title
+                +String currentStatus
+                +String assignee
+                +int storyPoints
+                +transition(newStatus)
+                +getLinkedCommits()
+                }
+
+                class Integration {
+                +String platform
+                +String status
+                +String credentials
+                +connect()
+                +disconnect()
+                +testConnection()
+                }
+
+                class PerformanceMetrics {
+                +String memberId
+                +String sprintId
+                +int commitCount
+                +int prMergeCount
+                +Float avgPRCycleTime
+                +int bugReportsCreated
+                +int cardsMoved
+                +generate()
+                +export()
+                }
+
+                Project "1" --> "*" Sprint : contains
+                Project "1" --> "*" Integration : uses
+                Project "1" --> "*" TeamMember : has
+                Sprint "1" --> "*" Task : tracks
+                TeamMember "1" --> "*" Signal : sends
+                Signal "1" --> "1" VerificationResult : produces
+                VerificationResult "1" --> "1" ApprovalSuggestion : triggers
+                ApprovalSuggestion "1" --> "1" Task : targets
+                TeamMember "1" --> "*" PerformanceMetrics : has
+
+                style Project fill:#818cf8,stroke:#000,stroke-width:2px
+                style Sprint fill:#34d399,stroke:#000,stroke-width:2px
+                style Signal fill:#fbbf24,stroke:#000,stroke-width:2px
+                style VerificationResult fill:#f87171,stroke:#000,stroke-width:2px
+                style ApprovalSuggestion fill:#4ade80,stroke:#000,stroke-width:2px
+                style TeamMember fill:#c084fc,stroke:#000,stroke-width:2px
+                style Task fill:#fb923c,stroke:#000,stroke-width:2px
+                style Integration fill:#94a3b8,stroke:#000,stroke-width:2px
+                style PerformanceMetrics fill:#38bdf8,stroke:#000,stroke-width:2px
+            </div>
+            <span class="caption">Core Technical Domain Model: Detailed Class relationships, attributes, and
+                methods.</span>
+        </div>
+
+        <h3>Core Workflow Sequence (Data Flow)</h3>
+        <p>The Sequence Diagram illustrates the temporal lifecycle of a requirement. It tracks the path from a raw
+            Discord message, through NLP intent extraction and GitHub code verification, to the final Jira API patch.
+        </p>
+        <div class="figure">
+            <div class="mermaid">
+                sequenceDiagram
+                autonumber
+                actor DEV as Developer
+                participant CH as Communication Channel
+                participant OC as Orchestration Layer
+                participant FE as Flowra Core
+                participant GH as Version Control API
+                participant PM as Product Manager
+                participant JI as Jira API
+
+                DEV->>CH: "Just pushed the fix for the auth timeout"
+                CH->>OC: Message event received
+                OC->>OC: NLP Extract completion signal
+                OC->>FE: Signal(task_hint, channel, timestamp)
+                FE->>FE: Match signal to Jira ticket by context
+                FE->>GH: Query commits, PRs, branch activity
+                GH-->>FE: Return matching commits + PR data
+                FE->>FE: Verify: Does code evidence support the claim?
+                alt Verification Passes
+                FE->>PM: Push approval notification to dashboard
+                PM->>FE: Approve card transition
+                FE->>JI: PATCH /issue/{key}/transitions
+                JI-->>FE: 204 No Content (success)
+                FE->>CH: Notify developer: "Ticket moved to In Review ✓"
+                else Verification Fails
+                FE->>FE: Log insufficient evidence no suggestion created
+                end
+            </div>
+            <span class="caption">Temporal Execution Model: From chat signal to verified board synchronization.</span>
+        </div>
+
+        <h3>Sequence Diagram : Rejection Path</h3>
+        <p>This diagram tracks the defensive logic of the system when a suggestion is dismissed. It ensures that no data
+            is written to Jira and that the audit log captures the reason for the rejection.</p>
+        <div class="figure">
+            <div class="mermaid">
+                sequenceDiagram
+                autonumber
+                actor PM as Product Manager
+                participant DASH as Flowra Dashboard
+                participant FE as Flowra Core
+                participant JI as Jira API
+                participant LOG as Audit Log
+
+                DASH->>PM: Notify: "Suggested transition for FLOW-42"
+                PM->>DASH: Open suggestion detail
+                DASH->>PM: Show: message, GitHub evidence, ticket info
+                PM->>DASH: Click "Reject" + add reason "Evidence insufficient"
+                DASH->>FE: POST /suggestions/{id}/reject
+                FE->>LOG: Record: rejection, actor, timestamp, reason
+                FE->>FE: Suppress FLOW-42 suggestion for 24h
+                FE-->>DASH: 200 OK : Rejection recorded
+                DASH->>PM: Confirm: "Suggestion dismissed"
+                Note over FE,JI: Jira is NEVER updated on rejection path
+            </div>
+            <span class="caption">Exception Handling Model: Visualizing the PM-led rejection and data suppression
+                workflow.</span>
+        </div>
+
+        <h3>Use Case Modeling</h3>
+        <p>The Use Case Diagram defines the primary value-adding interactions for each user role. It highlights how the
+            <em>System</em> itself acts as an autonomous actor for signal detection and evidence verification.
+        </p>
+        <div class="figure">
+            <div class="mermaid">
+                flowchart TB
+                PM(["👤 Product Manager"])
+                DEV(["👤 Developer"])
+                QA(["👤 QA Tester"])
+                ADM(["👤 System Admin"])
+                SYS(["⚙️ Flowra System\n(Automated Actor)"])
+
+                subgraph Flowra System
+                UC1([View Dashboard])
+                UC2([Approve Card Movement])
+                UC3([Reject Card Movement])
+                UC4([View Team Analytics])
+                UC5([Configure Integrations])
+                UC6([View Sprint Velocity])
+                UC7([Detect Completion Signal])
+                UC8([Verify Proof of Work])
+                UC9([Suggest Jira Transition])
+                UC10([View Personal Metrics])
+                UC11([Track Bug Reports])
+                UC12([File QA Sign-Off])
+                UC13([Generate Sprint Report])
+                UC14([Manage User Access])
+                end
+
+                PM --> UC1
+                PM --> UC2
+                PM --> UC3
+                PM --> UC4
+                PM --> UC5
+                PM --> UC6
+                DEV --> UC10
+                QA --> UC11
+                QA --> UC12
+                ADM --> UC14
+                ADM --> UC5
+                SYS --> UC7
+                SYS --> UC8
+                SYS --> UC9
+                SYS --> UC13
+
+                classDef pm fill:#c084fc,stroke:#000,stroke-width:2px;
+                classDef dev fill:#818cf8,stroke:#000,stroke-width:2px;
+                classDef qa fill:#34d399,stroke:#000,stroke-width:2px;
+                classDef sys fill:#fbbf24,stroke:#000,stroke-width:2px;
+                classDef uc fill:#ffffff,stroke:#000,stroke-width:2px;
+
+                class PM pm;
+                class DEV dev;
+                class QA qa;
+                class ADM pm;
+                class SYS sys;
+                class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14 uc;
+            </div>
+            <span class="caption">Actor Interaction Model: Defining core functional responsibilities and role-based
+                access.</span>
+        </div>
+
+        <!-- SECTION 7 -->
+        <h2>Project Management and Appendix</h2>
+
+        <h3>Meeting Minutes & Project Log</h3>
+        <p>As per Phase 1 requirements, this section contains the formal documentation of stakeholder interactions and
+            team synchronization sessions.</p>
+
+        <h4>7.1 Stakeholder Discovery Interview Meeting Minutes</h4>
+        <div class="findings-ledger"
+            style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border: 1px solid var(--neon-purple); margin-bottom: 30px;">
+            <table style="width: 100%; font-size: 10pt; border-collapse: collapse; margin-bottom: 15px;">
+                <tr>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Project:</strong>
+                    </td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">Flowra, Agentic Agile</td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Date:</strong>
+                    </td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">April 21, 2026</td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <strong>Participants:</strong></td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">Faizan Anwar (Lead),
+                        Tanguy De Branbandre (Stakeholder)</td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Duration:</strong>
+                    </td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">36 Minutes</td>
+                </tr>
+            </table>
+
+            <h5
+                style="color: var(--neon-blue); margin-top: 15px; border-bottom: 1px solid var(--neon-blue); padding-bottom: 5px;">
+                1. Agenda</h5>
+            <ul style="font-size: 10pt; margin-left: 20px;">
+                <li>Validation of industry pain points regarding manual Jira updates.</li>
+                <li>Feasibility review of AI-driven "Proof of Work" verification.</li>
+                <li>Evaluation of the "Approval-First Sync" workflow.</li>
+                <li>Identification of innovative edges (Risk Analysis vs. Automation).</li>
+            </ul>
+
+            <h5
+                style="color: var(--neon-blue); margin-top: 15px; border-bottom: 1px solid var(--neon-blue); padding-bottom: 5px;">
+                2. Discussion Highlights & Insights</h5>
+            <p style="font-size: 10pt; line-height: 1.5;">
+                <strong>Validating the "Lazy Dev" Problem:</strong> Tanguy laughed when we brought up sloppy reporting,
+                but he got serious about the "human in the loop" issue. He made a great point that managers are getting
+                buried under verification work as AI generates more code, which really validated why we need Flowra.
+                <br><br>
+                <strong>The Security Pivot:</strong> Interestingly, Tanguy wasn't as impressed by the simple automation
+                as he was by the <strong>Risk Analysis</strong> idea. He pushed us to think about Flowra as an audit
+                layer something that catches security leaks (like the public bucket example he mentioned) before they
+                hit production.
+                <br><br>
+                <strong>Simplifying the Scope:</strong> We had a bit of a reality check when discussing generic
+                environments (like construction). Tanguy helped us realize that we should stick to what we know the
+                developer space but build it modularly so other industries could plug in later if they wanted to.
+            </p>
+        </div>
+
+        <h4>7.2 Team Internal Meeting Minutes (SRS Finalization)</h4>
+        <div class="findings-ledger"
+            style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border: 1px solid var(--neon-purple); margin-bottom: 30px;">
+            <table style="width: 100%; font-size: 10pt; border-collapse: collapse; margin-bottom: 15px;">
+                <tr>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Meeting:</strong>
+                    </td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">Phase 1 Synthesis & SRS
+                        Review</td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Date:</strong>
+                    </td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">April 21, 2026</td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <strong>Participants:</strong></td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">Faizan, Waleed, Zarsham,
+                        Haleema, Anas, Furqan</td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong>Location:</strong>
+                    </td>
+                    <td style="padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">Discord Voice Channel</td>
+                </tr>
+            </table>
+
+            <h5
+                style="color: var(--neon-blue); margin-top: 15px; border-bottom: 1px solid var(--neon-blue); padding-bottom: 5px;">
+                1. Agenda</h5>
+            <ul style="font-size: 10pt; margin-left: 20px;">
+                <li>Review of Stakeholder Interview findings and required SRS pivots.</li>
+                <li>Finalization of MoSCoW prioritization for the Phase 1 Backlog.</li>
+                <li>UML Diagram consistency check (Sequence vs. Class vs. Architecture).</li>
+                <li>Submission formatting and accessibility verification.</li>
+            </ul>
+
+            <h5
+                style="color: var(--neon-blue); margin-top: 15px; border-bottom: 1px solid var(--neon-blue); padding-bottom: 5px;">
+                2. Discussion & Decisions</h5>
+            <p style="font-size: 10pt; line-height: 1.5;">
+                <strong>Refining the Backlog:</strong> After the interview, we had a long huddle about our priorities.
+                We originally had "Risk Analysis" as a secondary feature, but we decided to bump it up to 'Must Have'
+                because it's our biggest differentiator. We also officially scrapped the "Construction Site" idea to
+                keep our focus sharp on the MVP.
+                <br><br>
+                <strong>Finalizing the Visuals:</strong> Faizan walked us through the final UML diagrams. We spent some
+                time making sure the Sequence Diagram actually matched our Class attributes. We also did a final
+                walkthrough of the SRS to make sure the "Modular Core" message was consistent throughout the document.
+            </p>
+        </div>
+
+        <h4>7.3 Consolidated Project Activity Log</h4>
+
+
+        <table style="font-size: 9.5pt;">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Activity</th>
+                    <th>Participants</th>
+                    <th>Outcomes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>April 15, 2026</strong></td>
+                    <td>Initial Project Huddle</td>
+                    <td>Full Team</td>
+                    <td>Brainstormed "Flowra" concept; sorted out roles (Faizan as Lead, Waleed as PM).</td>
+                </tr>
+                <tr>
+                    <td><strong>April 17, 2026</strong></td>
+                    <td>Research & Deep Dive</td>
+                    <td>Faizan, Waleed</td>
+                    <td>Spent the evening breaking down Jira and LinearB to find gaps.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 19, 2026</strong></td>
+                    <td>Survey Kickoff</td>
+                    <td>Anas, Waleed</td>
+                    <td>Got the questionnaire out to our networks to start getting real data.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 21, 2026</strong></td>
+                    <td>Stakeholder Interview</td>
+                    <td>Faizan, Tanguy</td>
+                    <td>Validated problem; pivoted toward risk analysis insights.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 21, 2026</strong></td>
+                    <td>SRS Finalization</td>
+                    <td>Full Team</td>
+                    <td>Compiled all data into master Phase 1 submission.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 7, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Sprint kickoff and task assignment.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 8, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Initial research sync and tool evaluation.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 9, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Requirement gathering strategy discussion.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 10, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>End-of-week progress review and blocker removal.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 13, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Stakeholder interview script review.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 14, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Comparative analysis initial findings sync.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 15, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Survey questionnaire finalization.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 16, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Drafting of core system architecture diagrams.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 17, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Survey data collection status update.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 20, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Stakeholder feedback integration and SRS drafting.</td>
+                </tr>
+                <tr>
+                    <td><strong>April 21, 2026</strong></td>
+                    <td>Daily Standup @ 8:00 PM</td>
+                    <td>Furqan, Devs, QA</td>
+                    <td>Final document review and submission preparation.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Technical Tooling Stack</h3>
+        <table style="font-size: 10pt;">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Tool Used</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Project Management</strong></td>
+                    <td><strong>Jira Software</strong></td>
+                    <td>User story management and backlog prioritization.</td>
+                </tr>
+                <tr>
+                    <td><strong>Version Control</strong></td>
+                    <td><strong>GitHub</strong></td>
+                    <td>"Proof of Work" source and code hosting.</td>
+                </tr>
+                <tr>
+                    <td><strong>Requirement Gathering</strong></td>
+                    <td><strong>Google Forms</strong></td>
+                    <td>Survey distribution and quantitative data collection.</td>
+                </tr>
+                <tr>
+                    <td><strong>UML Modeling</strong></td>
+                    <td><strong>Mermaid.js</strong></td>
+                    <td>Creation of Use Case, Sequence, and Class diagrams.</td>
+                </tr>
+                <tr>
+                    <td><strong>Documentation</strong></td>
+                    <td><strong>Obsidian</strong></td>
+                    <td>SRS drafting, Markdown management, and document synthesis.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Evidence Index & Live Links</h3>
+        <p style="font-size: 11pt; line-height: 1.8;">
+            [Reference] <strong>Interview Recording:</strong> <a
+                href="https://drive.google.com/file/d/1ts_KpKQ1sSobvANIeXNcyr2BoMLHs4yj/view?usp=sharing">Google Drive
+                (Video)</a><br>
+            [Reference] <strong>Technical Transcript:</strong> <a
+                href="https://drive.google.com/file/d/1deOCLmS4A05eaIaed9GSmT6v-9jDIyf9/view?usp=sharing">Professional
+                PDF</a><br>
+            [Reference] <strong>Live Survey:</strong> <a href="https://forms.gle/qcPJZUgfk7o6YhMb9">Google Forms
+                Live</a><br>
+        </p>
+
+
+
+
+    </div>
+
+</body>
+
+</html>

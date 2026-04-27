@@ -1,9 +1,11 @@
 """
 Analytics and pattern mining for the QA system.
-Implements Frequent Itemset Mining to identify common query patterns.
+Implements Frequent Itemset Mining to identify common query patterns,
+and PageRank-style section importance tracking.
 """
 
 import re
+import time as time_module
 from typing import List, Set, Dict, Tuple
 from collections import Counter, defaultdict
 import itertools
@@ -96,13 +98,50 @@ class RetrievalAnalytics:
 
     def __init__(self):
         self.stats = defaultdict(list)
+        self.section_hits = Counter()   # chunk_id -> access count (PageRank proxy)
+        self.query_history = []         # last N queries with metadata
 
-    def log_performance(self, method: str, query_time: float, num_results: int):
-        """Log retrieval performance metrics."""
+    def log_performance(self, method: str, query_time: float, num_results: int,
+                        query: str = None, chunk_ids: list = None):
+        """Log retrieval performance metrics and track section access."""
         self.stats[method].append({
             'time': query_time,
             'results': num_results
         })
+        if chunk_ids:
+            for cid in chunk_ids:
+                self.section_hits[cid] += 1
+        if query:
+            self.query_history.append({
+                'query': query[:60] + ('…' if len(query) > 60 else ''),
+                'method': method.upper(),
+                'time_ms': round(query_time * 1000, 3),
+                'results': num_results,
+            })
+            if len(self.query_history) > 50:
+                self.query_history = self.query_history[-50:]
+
+    def total_query_count(self) -> int:
+        return sum(len(v) for v in self.stats.values())
+
+    def get_section_importance(self, doc_metadata: dict, top_n: int = 8) -> List[Dict]:
+        """
+        PageRank-style: sections ranked by query access frequency.
+        Sections retrieved more often across queries are treated as 'important'.
+        """
+        results = []
+        seen_sources = set()
+        for chunk_id, count in self.section_hits.most_common(top_n * 3):
+            meta = doc_metadata.get(chunk_id, {})
+            source = meta.get('source', 'unknown')
+            page = meta.get('page', '?')
+            label = f"{source} / p{page}"
+            if label not in seen_sources:
+                seen_sources.add(label)
+                results.append({'label': label, 'hits': count})
+            if len(results) >= top_n:
+                break
+        return results
 
     def get_summary(self) -> Dict:
         """Get summary of performance metrics."""

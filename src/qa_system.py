@@ -163,26 +163,23 @@ class AcademicQASystem:
             start = time.time()
             results = self.retrieve_lsh(query, top_k)
             duration = time.time() - start
-            if timing_data is not None:
-                timing_data['retrieval_time'] = duration
-            self.analytics.log_performance('lsh', duration, len(results))
         elif method == 'simhash':
             start = time.time()
             results = self.retrieve_simhash(query, top_k)
             duration = time.time() - start
-            if timing_data is not None:
-                timing_data['retrieval_time'] = duration
-            self.analytics.log_performance('simhash', duration, len(results))
         elif method == 'tfidf':
             start = time.time()
             results = self.retrieve_tfidf(query, top_k)
             duration = time.time() - start
-            if timing_data is not None:
-                timing_data['retrieval_time'] = duration
-            self.analytics.log_performance('tfidf', duration, len(results))
         else:
             raise ValueError(f"Unknown retrieval method: {method}")
 
+        if timing_data is not None:
+            timing_data['retrieval_time'] = duration
+
+        chunk_ids = [r[0] for r in results]
+        self.analytics.log_performance(method, duration, len(results),
+                                       query=query, chunk_ids=chunk_ids)
         # Log query for pattern mining
         self.miner.log_query(query)
 
@@ -277,18 +274,28 @@ class AcademicQASystem:
         else:
             answer = self.generate_answer_extractive(query, chunk_texts)
 
+        query_tokens = set(self.processor.tokenize(query))
+        chunks_result = []
+        for chunk_id, similarity in retrieved:
+            chunk_tokens = set(self.processor.tokenize(self.documents[chunk_id]))
+            # Word coverage: fraction of query keywords present in the chunk
+            coverage = len(query_tokens & chunk_tokens) / max(len(query_tokens), 1)
+            # Blend coverage (0-1) with normalised similarity for final confidence
+            # TF-IDF cosine is already 0-1; Jaccard/SimHash tend to be <0.3 so scale up
+            sim_norm = min(similarity * 3.0, 1.0) if method in ('lsh', 'simhash') else similarity
+            confidence = min(1.0, coverage * 0.65 + sim_norm * 0.35)
+            chunks_result.append({
+                'id': chunk_id,
+                'text': self.documents[chunk_id][:200] + "...",
+                'source': self.doc_metadata[chunk_id].get('source', 'Unknown'),
+                'similarity': similarity,
+                'confidence': confidence,
+            })
+
         return {
             'query': query,
             'answer': answer,
-            'retrieved_chunks': [
-                {
-                    'id': chunk_id,
-                    'text': self.documents[chunk_id][:200] + "...",
-                    'source': self.doc_metadata[chunk_id].get('source', 'Unknown'),
-                    'similarity': similarity
-                }
-                for chunk_id, similarity in retrieved
-            ],
+            'retrieved_chunks': chunks_result,
             'method': method,
             'timing': timing
         }
@@ -299,6 +306,7 @@ class AcademicQASystem:
             'total_chunks': len(self.documents),
             'total_tokens': sum(len(self.processor.tokenize(text))
                                for text in self.documents.values()),
+            'total_queries': self.analytics.total_query_count(),
             'methods_enabled': {
                 'lsh': self.use_lsh,
                 'simhash': self.use_simhash,
@@ -306,6 +314,8 @@ class AcademicQASystem:
                 'llm': self.use_llm
             },
             'performance_summary': self.analytics.get_summary(),
-            'hot_topics': self.miner.get_hot_topics(top_n=10)
+            'hot_topics': self.miner.get_hot_topics(top_n=10),
+            'query_history': list(reversed(self.analytics.query_history[-10:])),
+            'section_importance': self.analytics.get_section_importance(self.doc_metadata),
         }
         return stats

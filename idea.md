@@ -1,3 +1,10 @@
+Names CMS
+M Faizan Anwar 455259
+Muhammad Haadhee Sheeraz Mian 478359
+Rayyan Faisal
+
+
+
 Scalable Academic Policy QA System
 
 Design and implement a scalable Question-Answering system over the UG and PG Handbooks

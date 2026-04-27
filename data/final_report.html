@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finrate | BDA Master Submission Report</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f1f5f9',
+                primaryTextColor: '#000000',
+                primaryBorderColor: '#000000',
+                lineColor: '#000000',
+                secondaryColor: '#f8fafc',
+                tertiaryColor: '#ffffff',
+                mainBkg: '#ffffff',
+                nodeBorder: '#000000',
+                clusterBkg: '#ffffff',
+                titleColor: '#000000',
+                edgeLabelBackground: '#ffffff',
+                fontFamily: 'Inter',
+                fontSize: '16px',
+                borderWidth: '2.5px'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --title-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --brand-font: 'Outfit', sans-serif;
+            --mono-font: 'JetBrains Mono', monospace;
+            --text-color: #000000;
+            --paper-width: 320mm;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: #e2e8f0;
+            font-family: var(--body-font);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 60px 0;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .paper {
+            background-color: white;
+            width: var(--paper-width);
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 20mm 25mm;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid #cbd5e1;
+            position: relative;
+        }
+
+        .title-block {
+            text-align: center;
+            margin-bottom: 4em;
+            padding-bottom: 2.5em;
+            border-bottom: 2px solid #000;
+        }
+
+        .course-tag {
+            font-family: var(--mono-font);
+            font-size: 10pt;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1.5em;
+            display: block;
+            color: #64748b;
+        }
+
+        .project-name {
+            font-family: var(--brand-font);
+            font-size: 85pt;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -6px;
+            color: #000;
+            line-height: 0.8;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 16pt;
+            color: #000;
+            font-weight: 700;
+            margin-top: 1.5em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: var(--brand-font);
+            letter-spacing: -0.5px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 4em;
+            text-align: left;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2.5em;
+        }
+
+        .team-member {
+            padding: 10px;
+            border-left: 4px solid #000;
+            padding-left: 15px;
+        }
+
+        .member-name {
+            display: block;
+            font-weight: 800;
+            font-size: 12pt;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .member-role {
+            display: block;
+            font-size: 9pt;
+            color: #475569;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+        }
+
+        .section-header {
+            margin-top: 3.5em;
+            margin-bottom: 1.5em;
+            font-family: var(--brand-font);
+            font-size: 28pt;
+            font-weight: 900;
+            border-bottom: 6px solid #000;
+            display: inline-block;
+            padding-right: 40px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+        }
+
+        .subsection-header {
+            margin-top: 2em;
+            margin-bottom: 1em;
+            font-family: var(--brand-font);
+            font-size: 18pt;
+            font-weight: 800;
+            color: #000;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .subsection-header::before {
+            content: "";
+            width: 30px;
+            height: 4px;
+            background: #000;
+            display: block;
+        }
+
+        p {
+            font-size: 11.5pt;
+            color: #334155;
+            line-height: 1.7;
+            margin-bottom: 1.2em;
+            text-align: justify;
+        }
+
+        .abstract-box {
+            background: #f8fafc;
+            border: 3px solid #000;
+            padding: 35px;
+            margin: 4em 0;
+            box-shadow: 15px 15px 0px #000;
+        }
+
+        .abstract-box h3 {
+            font-family: var(--brand-font);
+            font-size: 14pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 1em;
+            border-bottom: 2px solid #000;
+            display: inline-block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2em 0;
+            font-size: 10pt;
+            border: 3px solid #000;
+        }
+
+        th {
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            text-align: left;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #000;
+        }
+
+        td {
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        tr:nth-child(even) { background: #f1f5f9; }
+
+        .figure-box {
+            margin: 4em 0;
+            padding: 50px;
+            background: #fff;
+            border: 3px solid #000;
+            box-shadow: 20px 20px 0px #f1f5f9, 20px 20px 0px 2px #000;
+            text-align: center;
+        }
+
+        .caption {
+            margin-top: 2em;
+            font-family: var(--mono-font);
+            font-weight: 800;
+            font-size: 9pt;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .code-snippet {
+            font-family: var(--mono-font);
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 0;
+            border: 3px solid #000;
+            box-shadow: 12px 12px 0px #000;
+            margin: 2.5em 0;
+            overflow-x: auto;
+            font-size: 10pt;
+            line-height: 1.5;
+        }
+
+        .code-snippet .keyword { color: #f472b6; }
+        .code-snippet .func { color: #38bdf8; }
+        .code-snippet .comment { color: #94a3b8; font-style: italic; }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            margin: 4em 0;
+        }
+
+        .screenshot-box {
+            width: 100%;
+            border: 3px solid #000;
+            background: #f8fafc;
+            position: relative;
+            box-shadow: 15px 15px 0px #000;
+        }
+
+        .screenshot-placeholder {
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            background: #f1f5f9;
+            border-bottom: 3px solid #000;
+        }
+
+        .screenshot-label {
+            padding: 20px;
+            font-family: var(--mono-font);
+            font-weight: 800;
+            font-size: 9pt;
+            text-transform: uppercase;
+            text-align: center;
+            background: #fff;
+        }
+
+        .metric-card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 3em 0;
+        }
+
+        .metric-card {
+            border: 3px solid #000;
+            padding: 25px;
+            text-align: center;
+            background: #fff;
+            box-shadow: 8px 8px 0px #000;
+        }
+
+        .metric-value {
+            font-family: var(--brand-font);
+            font-size: 32pt;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .metric-unit {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+        }
+
+        .star-rating { color: #000; font-size: 14pt; letter-spacing: -2px; }
+
+        .contribution-table tr td:first-child { font-weight: 800; width: 220px; text-transform: uppercase; font-size: 9pt; }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .paper { box-shadow: none; border: none; width: 100%; margin: 0; padding: 15mm; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="paper">
+        <!-- HEADER SECTION -->
+        <div class="title-block">
+            <span class="course-tag">Big Data Algorithms | CS-452</span>
+            <h1 class="project-name">FINRATE.</h1>
+            <p class="tagline">Scalable Question-Answering System over Academic Statues using Locality Sensitive Hashing (LSH) and MinHash.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <span class="member-name">Rayyan Faisal</span>
+                    <span class="member-role">System Architect & Lead</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Muhammad Haadhee</span>
+                    <span class="member-role">Documentation & Requirement Lead</span>
+                </div>
+                <div class="team-member">
+                    <span class="member-name">Muhammad Faizan Anwar</span>
+                    <span class="member-role">Lead Algorithm Engineer</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="abstract-box">
+            <h3>Executive Summary</h3>
+            <p>Traditional full-text search systems fail to maintain interactive latencies when processing massive statutory corpora. 
+               <strong>Finrate</strong> addresses this bottleneck by implementing a production-grade <strong>Locality Sensitive Hashing (LSH)</strong> 
+               and <strong>SimHash</strong> retrieval engine. By transforming high-dimensional policy documents into compact MinHash signatures, 
+               the system achieves near-constant $O(1)$ query complexity. Our implementation demonstrates a <strong>36.6x speedup</strong> 
+               compared to exact search baselines, enabling real-time QA over thousands of academic policy sections with a minimal 7% loss in accuracy.</p>
+        </div>
+
+        <!-- SECTION 1: INTRODUCTION -->
+        <div class="section-header">01. Introduction & Motivation</div>
+        <p>University handbooks (UG/PG) contain thousands of critical clauses regarding GPA requirements, attendance, and graduation criteria. 
+           Students frequently require immediate answers to complex policy questions, but manual navigation is prohibitive. 
+           Finrate bridges this gap using Big Data techniques to provide a scalable, approximate similarity search system that can quickly 
+           retrieve relevant policy sections.</p>
+
+        <div class="metric-card-grid">
+            <div class="metric-card">
+                <span class="metric-value">36.6x</span>
+                <span class="metric-unit">LSH Speedup</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">0.001s</span>
+                <span class="metric-unit">Query Latency</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">93%</span>
+                <span class="metric-unit">LSH Recall</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">O(1)</span>
+                <span class="metric-unit">Complexity</span>
+            </div>
+        </div>
+
+        <!-- SECTION 2: SYSTEM ARCHITECTURE -->
+        <div class="section-header">02. System Architecture</div>
+        <p>Finrate follows a modular retrieval-augmented generation (RAG) pipeline designed for scalability. The system separates 
+           data ingestion, approximate indexing, and generative answer synthesis into distinct service layers.</p>
+
+        <div class="figure-box">
+            <div class="mermaid">
+                flowchart TD
+                subgraph "Data Pipeline"
+                A[PDF Handbooks] --> B[pdfplumber\nExtraction]
+                B --> C[Overlapping Chunks\n300w, 50o]
+                end
+                subgraph "Indexing Engine"
+                C --> D[MinHash + LSH\nJaccard Approx]
+                C --> E[SimHash\nFingerprinting]
+                C --> F[TF-IDF\nExact Baseline]
+                end
+                subgraph "Query Orchestration"
+                G[User Query] --> H[Retrieval Orchestrator]
+                H --> D & E & F
+                D & E & F --> I[Top-K Candidate Selection]
+                I --> J[Gemini 3 Flash\nSynthesis]
+                end
+                J --> K[Final Answer + Evidence]
+            </div>
+            <span class="caption">Figure 1: Finrate High-Level Architecture and Data Flow.</span>
+        </div>
+
+        <!-- SECTION 3: ALGORITHM IMPLEMENTATION -->
+        <div class="section-header">03. Algorithm Implementation</div>
+        
+        <div class="subsection-header">3.1 MinHash and LSH</div>
+        <p>To ensure scalability, we implemented a vectorized MinHash approach using NumPy. Instead of iterating through hash functions for each token, 
+           we compute all hash values simultaneously using matrix multiplication.</p>
+
+        <div class="code-snippet">
+<span class="comment"># Vectorized MinHash implementation for high-speed indexing</span>
+<span class="keyword">def</span> <span class="func">compute_signature</span>(self, tokens):
+    token_hashes = np.array([self.hash_token(t) <span class="keyword">for</span> t <span class="keyword">in</span> tokens])
+    <span class="comment"># Vectorized computation of hash functions</span>
+    hash_values = (np.outer(self.a, token_hashes) + self.b[:, np.newaxis]) % self.p
+    signature = np.min(hash_values, axis=1)
+    <span class="keyword">return</span> signature
+        </div>
+
+        <div class="subsection-header">3.2 LSH Banding</div>
+        <p>Signatures are divided into $b=8$ bands with $r=16$ rows per band to tune the probability of collision. 
+           This allows us to find similar documents in constant time by hashing the bands into buckets.</p>
+
+        <div class="code-snippet">
+<span class="keyword">class</span> <span class="func">LSH</span>:
+    <span class="keyword">def</span> <span class="func">query</span>(self, query_sig):
+        candidates = set()
+        <span class="keyword">for</span> band_idx <span class="keyword">in</span> range(self.num_bands):
+            band_sig = query_sig[band_idx * rows : (band_idx+1) * rows]
+            bucket_key = hash(tuple(band_sig))
+            <span class="keyword">if</span> bucket_key <span class="keyword">in</span> self.buckets[band_idx]:
+                candidates.update(self.buckets[band_idx][bucket_key])
+        <span class="keyword">return</span> candidates
+        </div>
+
+        <!-- SECTION 4: CREATIVE EXTENSION -->
+        <div class="section-header">04. Creative Extension: Query Mining</div>
+        <p>To provide a competitive edge, we implemented a <strong>Query Pattern Mining</strong> engine using a simplified <strong>Apriori algorithm</strong>. 
+           This identifies common query patterns and "Hot Topics" (e.g., "GPA requirements", "Attendance policy") based on user interactions.</p>
+
+        <div class="code-snippet">
+<span class="comment"># Two-pass pattern mining for hot topic discovery</span>
+<span class="keyword">def</span> <span class="func">find_frequent_patterns</span>(self, logs, min_support=0.1):
+    <span class="comment"># Pass 1: Count 1-itemsets (words)</span>
+    freq_items = self.get_frequent_items(logs, min_support)
+    <span class="comment"># Pass 2: Generate 2-itemset candidates and count</span>
+    patterns = self.generate_and_count_pairs(logs, freq_items)
+    <span class="keyword">return</span> patterns
+        </div>
+
+        <!-- SECTION 5: EXPERIMENTAL RESULTS -->
+        <div class="section-header">05. Experimental Results</div>
+        
+        <div class="subsection-header">5.1 Retrieval Method Comparison</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Avg Query Time</th>
+                    <th>Min Time</th>
+                    <th>Max Time</th>
+                    <th>Std Dev</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LSH (MinHash)</strong></td>
+                    <td>0.0012s</td>
+                    <td>0.0008s</td>
+                    <td>0.0018s</td>
+                    <td>0.0003s</td>
+                </tr>
+                <tr>
+                    <td><strong>SimHash</strong></td>
+                    <td>0.0024s</td>
+                    <td>0.0018s</td>
+                    <td>0.0035s</td>
+                    <td>0.0005s</td>
+                </tr>
+                <tr>
+                    <td><strong>TF-IDF (Baseline)</strong></td>
+                    <td>0.0058s</td>
+                    <td>0.0045s</td>
+                    <td>0.0085s</td>
+                    <td>0.0012s</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-header">5.2 Scalability Analysis</div>
+        <p>Finrate demonstrates massive scalability advantages as the corpus grows. While TF-IDF query time increases linearly, 
+           LSH remains nearly constant.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Corpus Size</th>
+                    <th>LSH Query</th>
+                    <th>TF-IDF Query</th>
+                    <th>Speedup Factor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>150 docs</td>
+                    <td>0.0012s</td>
+                    <td>0.0058s</td>
+                    <td>4.8x</td>
+                </tr>
+                <tr>
+                    <td>750 docs</td>
+                    <td>0.0014s</td>
+                    <td>0.0285s</td>
+                    <td>20.4x</td>
+                </tr>
+                <tr>
+                    <td>1500 docs</td>
+                    <td>0.0018s</td>
+                    <td>0.0658s</td>
+                    <td>36.6x</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION 6: TRADEOFF ANALYSIS -->
+        <div class="section-header">06. Tradeoff Analysis</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>LSH (Approximate)</th>
+                    <th>TF-IDF (Exact Baseline)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Speed / Latency</td>
+                    <td><span class="star-rating">⭐⭐⭐⭐⭐</span></td>
+                    <td><span class="star-rating">⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td>Retrieval Accuracy</td>
+                    <td><span class="star-rating">⭐⭐⭐⭐</span></td>
+                    <td><span class="star-rating">⭐⭐⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td>Memory Efficiency</td>
+                    <td><span class="star-rating">⭐⭐⭐⭐⭐</span></td>
+                    <td><span class="star-rating">⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td><span class="star-rating">⭐⭐⭐⭐⭐</span></td>
+                    <td><span class="star-rating">⭐⭐</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION 7: INTERFACE & SCREENSHOTS -->
+        <div class="section-header">07. Interface Implementation</div>
+        <div class="screenshot-grid">
+            <div class="screenshot-box">
+                <div class="screenshot-placeholder">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <span style="font-family: var(--mono-font); font-size: 10pt; color: #64748b;">[ SCREENSHOT 01: LANDING_PAGE_STANDBY ]</span>
+                </div>
+                <div class="screenshot-label">Ref-FR-01: Landing Page showing Engine Initialization and Corpus Statistics.</div>
+            </div>
+
+            <div class="screenshot-box">
+                <div class="screenshot-placeholder">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <span style="font-family: var(--mono-font); font-size: 10pt; color: #64748b;">[ SCREENSHOT 02: SEARCH_RESULTS_UI ]</span>
+                </div>
+                <div class="screenshot-label">Ref-FR-02: Search Results Interface displaying Generative Answer and Evidence Chunks.</div>
+            </div>
+
+            <div class="screenshot-box">
+                <div class="screenshot-placeholder">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 3v18h18"></path>
+                        <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                    </svg>
+                    <span style="font-family: var(--mono-font); font-size: 10pt; color: #64748b;">[ SCREENSHOT 03: ANALYTICS_DASHBOARD ]</span>
+                </div>
+                <div class="screenshot-label">Ref-FR-03: Real-time Analytics Dashboard with Latency Distribution and Apriori Topics.</div>
+            </div>
+        </div>
+
+        <div class="abstract-box" style="background: #fffbeb; border-color: #d97706; box-shadow: 15px 15px 0px #d97706;">
+            <h3 style="border-color: #d97706;">Instructions for User Screenshots</h3>
+            <p style="color: #92400e; font-weight: 600;">To complete this report, please replace the placeholders above with your actual screenshots:</p>
+            <ul style="color: #92400e; font-size: 10.5pt; font-weight: 500;">
+                <li><strong>Screenshot 01</strong>: Open the app and capture the home screen before clicking "BOOT ENGINE".</li>
+                <li><strong>Screenshot 02</strong>: Boot the engine, query *"What is the minimum GPA requirement?"*, and capture the answer + evidence.</li>
+                <li><strong>Screenshot 03</strong>: Navigate to the **[ ANALYTICS ]** tab and capture the charts and hot topics.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 8: MEMBER CONTRIBUTIONS -->
+        <div class="section-header">08. Member Contributions</div>
+        <table class="contribution-table">
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th>Core Contributions & Responsibilities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Rayyan Faisal</strong></td>
+                    <td><strong>System Architect:</strong> Designed the modular RAG architecture, implemented the Streamlit orchestrator, and handled the integration of LSH/SimHash search spaces with the generative layer.</td>
+                </tr>
+                <tr>
+                    <td><strong>Haadhee</strong></td>
+                    <td><strong>Documentation Lead:</strong> Compiled the master technical report, conducted the ground truth manual evaluation (15+ queries), and defined the SRS and evaluation metrics.</td>
+                </tr>
+                <tr>
+                    <td><strong>Faizan Anwar</strong></td>
+                    <td><strong>Algorithm Lead:</strong> Implemented the vectorized MinHash signature engine, SimHash Hamming distance logic, and the Apriori-based query pattern extension. Managed all performance benchmarking.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- FOOTER -->
+        <div style="text-align: center; margin-top: 100px; border-top: 3px solid #000; padding-top: 50px; margin-bottom: 50px;">
+            <p style="font-family: var(--brand-font); font-weight: 900; font-size: 20pt; letter-spacing: 5px; color: #000;">FINRATE 2026</p>
+            <p style="font-family: var(--mono-font); font-size: 9pt; color: #64748b; text-transform: uppercase;">Master Submission | Big Data Algorithms | Section C Group 3</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
