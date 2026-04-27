@@ -47,24 +47,42 @@ st.markdown("""
         color: #FFFFFF !important;
     }
     
-    /* Sidebar Buttons - Specificity Fix */
-    div[data-testid="stSidebar"] .stButton > button {
+    /* Sidebar Buttons - Ultra Specific Fix */
+    div[data-testid="stSidebar"] button {
+        background-color: #FFFFFF !important;
+        border: 2px solid #FFFFFF !important;
+        width: 100% !important;
+        transition: all 0.3s ease !important;
+        border-radius: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] button p {
+        color: #000000 !important;
+        font-weight: 800 !important;
+    }
+    
+    div[data-testid="stSidebar"] button:hover {
+        background-color: #000000 !important;
+        border: 2px solid #FFFFFF !important;
+    }
+    
+    div[data-testid="stSidebar"] button:hover p {
+        color: #FFFFFF !important;
+    }
+
+    /* Sidebar Selectbox & Inputs Fix */
+    div[data-testid="stSidebar"] div[data-baseweb="select"] > div {
         background-color: #FFFFFF !important;
         color: #000000 !important;
         border-radius: 0 !important;
-        border: 2px solid #FFFFFF !important;
-        width: 100% !important;
-        font-weight: 800 !important;
-        transition: all 0.3s ease-in-out !important;
     }
     
-    div[data-testid="stSidebar"] .stButton > button:hover {
-        background-color: #000000 !important;
-        color: #FFFFFF !important;
-        border: 2px solid #FFFFFF !important;
+    div[data-testid="stSidebar"] div[data-baseweb="select"] * {
+        color: #000000 !important;
+        font-weight: 600 !important;
     }
     
-    div[data-testid="stSidebar"] .stButton > button:hover * {
+    div[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
         color: #FFFFFF !important;
     }
 
@@ -147,23 +165,26 @@ st.markdown("""
         color: #000000 !important;
     }
 
-    /* Input Field */
+    /* Input Field - Final Vertical Centering Fix */
     .stTextInput>div>div>input {
         border-radius: 0 !important;
         border: 3px solid #000000 !important;
-        font-size: 1.2rem !important;
+        font-size: 1.25rem !important;
         height: 70px !important;
+        line-height: 70px !important;
         background-color: #FFFFFF !important;
         color: #000000 !important;
-        padding: 0 20px !important;
+        padding: 0px 25px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
     }
 
     .answer-panel {
         background: #000000;
         color: #FFFFFF !important;
-        padding: 45px;
-        font-size: 1.25rem;
-        line-height: 1.7;
+        padding: 50px;
+        font-size: 1.3rem;
+        line-height: 1.8;
         border: 5px solid #000000;
         margin-top: 30px;
     }
@@ -202,11 +223,6 @@ st.markdown("""
 
     [data-testid="stHeader"] {
         background-color: rgba(255, 255, 255, 0.9) !important;
-    }
-
-    /* Adjust Deploy Button Position */
-    [data-testid="stAppDeploy"] {
-        margin-right: 25px !important;
     }
 </style>
 """, unsafe_allow_html=True)
