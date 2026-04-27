@@ -10,27 +10,27 @@ Top-K Results: 5
 
 Method                    | Latency    | Recall   | Precision 
 --------------------------------------------------------------------------------
-TF-IDF (Baseline)         |    0.70 ms |    1.00 |      1.00
-LSH (MinHash)             |    0.41 ms |    0.37 |      0.24
-SimHash                   |    0.91 ms |    0.21 |      0.08
-Hybrid (RRF)              |    1.49 ms |    0.35 |      0.21
+TF-IDF (Baseline)         |    0.62 ms |    1.00 |      1.00
+LSH (MinHash)             |    0.33 ms |    0.44 |      0.31
+SimHash                   |    0.74 ms |    0.21 |      0.08
+Hybrid (RRF)              |    1.13 ms |    0.37 |      0.24
 
 
 2. PARAMETER SENSITIVITY ANALYSIS
 --------------------------------------------------------------------------------
 
 Hash Functions Impact:
-  32 hashes: 0.000221s, 43 results
-  64 hashes: 0.000166s, 18 results
-  128 hashes: 0.000329s, 49 results
-  256 hashes: 0.000581s, 77 results
+  32 hashes: 0.000144s, 24 results
+  64 hashes: 0.000346s, 74 results
+  128 hashes: 0.000370s, 77 results
+  256 hashes: 0.000424s, 75 results
 
 Bands Impact (LSH Bands):
-  8 bands: 0.000054s, 0 results
-  16 bands: 0.000052s, 0 results
+  8 bands: 0.000044s, 0 results
+  16 bands: 0.000041s, 0 results
   32 bands: 0.000060s, 0 results
-  64 bands: 0.000088s, 0 results
-  128 bands: 0.000230s, 31 results
+  64 bands: 0.000084s, 0 results
+  128 bands: 0.000323s, 63 results
 
 SimHash Threshold Impact:
   Threshold 0.5: 68 results
@@ -45,28 +45,28 @@ SimHash Threshold Impact:
 Original Document Count: 254
 
 Scale Factor: 1x (254 documents)
-  LSH Index Time: 0.482314s
-  LSH Query Time: 0.000437s
-  TF-IDF Index Time: 0.040598s
-  TF-IDF Query Time: 0.000839s
+  LSH Index Time: 0.405255s
+  LSH Query Time: 0.000315s
+  TF-IDF Index Time: 0.038953s
+  TF-IDF Query Time: 0.000789s
 
 Scale Factor: 2x (508 documents)
-  LSH Index Time: 1.111392s
-  LSH Query Time: 0.000703s
-  TF-IDF Index Time: 0.095131s
-  TF-IDF Query Time: 0.001144s
+  LSH Index Time: 0.833783s
+  LSH Query Time: 0.000484s
+  TF-IDF Index Time: 0.059769s
+  TF-IDF Query Time: 0.000829s
 
 Scale Factor: 5x (1270 documents)
-  LSH Index Time: 3.137141s
-  LSH Query Time: 0.002993s
-  TF-IDF Index Time: 0.276782s
-  TF-IDF Query Time: 0.002435s
+  LSH Index Time: 2.072010s
+  LSH Query Time: 0.000750s
+  TF-IDF Index Time: 0.153281s
+  TF-IDF Query Time: 0.001419s
 
 Scale Factor: 10x (2540 documents)
-  LSH Index Time: 4.298345s
-  LSH Query Time: 0.001249s
-  TF-IDF Index Time: 0.273153s
-  TF-IDF Query Time: 0.002360s
+  LSH Index Time: 3.892374s
+  LSH Query Time: 0.000892s
+  TF-IDF Index Time: 0.244975s
+  TF-IDF Query Time: 0.002268s
 
 
 ================================================================================

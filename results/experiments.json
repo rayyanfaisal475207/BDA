@@ -5,69 +5,69 @@
     "methods": {
       "tfidf": {
         "label": "TF-IDF (Baseline)",
-        "avg_time": 0.0006984233856201172,
+        "avg_time": 0.0006220817565917968,
         "avg_recall": 1.0,
         "avg_precision": 1.0
       },
       "lsh": {
         "label": "LSH (MinHash)",
-        "avg_time": 0.00040748914082845055,
-        "avg_recall": 0.37333333333333335,
-        "avg_precision": 0.24000000000000005
+        "avg_time": 0.00033165613810221353,
+        "avg_recall": 0.4400000000000001,
+        "avg_precision": 0.3066666666666667
       },
       "simhash": {
         "label": "SimHash",
-        "avg_time": 0.0009062449137369792,
+        "avg_time": 0.0007367928822835287,
         "avg_recall": 0.21333333333333335,
         "avg_precision": 0.08
       },
       "hybrid": {
         "label": "Hybrid (RRF)",
-        "avg_time": 0.001491403579711914,
-        "avg_recall": 0.3466666666666667,
-        "avg_precision": 0.21333333333333335
+        "avg_time": 0.0011263052622477213,
+        "avg_recall": 0.3733333333333333,
+        "avg_precision": 0.24000000000000002
       }
     }
   },
   "parameter_sensitivity": {
     "hash_functions": {
       "32": {
-        "time": 0.00022125244140625,
-        "results": 43
+        "time": 0.0001437664031982422,
+        "results": 24
       },
       "64": {
-        "time": 0.0001659393310546875,
-        "results": 18
+        "time": 0.00034618377685546875,
+        "results": 74
       },
       "128": {
-        "time": 0.00032901763916015625,
-        "results": 49
+        "time": 0.000370025634765625,
+        "results": 77
       },
       "256": {
-        "time": 0.0005810260772705078,
-        "results": 77
+        "time": 0.0004239082336425781,
+        "results": 75
       }
     },
     "bands": {
       "8": {
-        "time": 5.412101745605469e-05,
+        "time": 4.410743713378906e-05,
         "results": 0
       },
       "16": {
-        "time": 5.1975250244140625e-05,
+        "time": 4.076957702636719e-05,
         "results": 0
       },
       "32": {
-        "time": 6.008148193359375e-05,
+        "time": 5.984306335449219e-05,
         "results": 0
       },
       "64": {
-        "time": 8.797645568847656e-05,
+        "time": 8.392333984375e-05,
         "results": 0
       },
       "128": {
-        "time": 0.0002300739288330078,
-        "results": 31
+        "time": 0.0003230571746826172,
+        "results": 63
       }
     },
     "simhash_threshold": {
@@ -101,38 +101,42 @@
       {
         "scale_factor": 1,
         "doc_count": 254,
-        "lsh_index_time": 0.4823141098022461,
-        "lsh_query_time": 0.00043702125549316406,
-        "hybrid_query_time": 0.0005244255065917969,
-        "tfidf_index_time": 0.040598154067993164,
-        "tfidf_query_time": 0.0008389949798583984
+        "lsh_index_time": 0.4052548408508301,
+        "lsh_query_time": 0.0003147125244140625,
+        "simhash_query_time": 0.0008168220520019531,
+        "hybrid_query_time": 0.0010800361633300781,
+        "tfidf_index_time": 0.03895306587219238,
+        "tfidf_query_time": 0.0007891654968261719
       },
       {
         "scale_factor": 2,
         "doc_count": 508,
-        "lsh_index_time": 1.1113920211791992,
-        "lsh_query_time": 0.0007028579711914062,
-        "hybrid_query_time": 0.0008434295654296875,
-        "tfidf_index_time": 0.09513115882873535,
-        "tfidf_query_time": 0.0011439323425292969
+        "lsh_index_time": 0.8337829113006592,
+        "lsh_query_time": 0.00048422813415527344,
+        "simhash_query_time": 0.0013759136199951172,
+        "hybrid_query_time": 0.0017981529235839844,
+        "tfidf_index_time": 0.0597686767578125,
+        "tfidf_query_time": 0.0008292198181152344
       },
       {
         "scale_factor": 5,
         "doc_count": 1270,
-        "lsh_index_time": 3.137140989303589,
-        "lsh_query_time": 0.0029931068420410156,
-        "hybrid_query_time": 0.0035917282104492186,
-        "tfidf_index_time": 0.2767822742462158,
-        "tfidf_query_time": 0.0024347305297851562
+        "lsh_index_time": 2.072010040283203,
+        "lsh_query_time": 0.0007498264312744141,
+        "simhash_query_time": 0.003846883773803711,
+        "hybrid_query_time": 0.0043752193450927734,
+        "tfidf_index_time": 0.15328121185302734,
+        "tfidf_query_time": 0.0014190673828125
       },
       {
         "scale_factor": 10,
         "doc_count": 2540,
-        "lsh_index_time": 4.298344850540161,
-        "lsh_query_time": 0.001249074935913086,
-        "hybrid_query_time": 0.0014988899230957032,
-        "tfidf_index_time": 0.27315306663513184,
-        "tfidf_query_time": 0.002360105514526367
+        "lsh_index_time": 3.892374038696289,
+        "lsh_query_time": 0.0008921623229980469,
+        "simhash_query_time": 0.0056612491607666016,
+        "hybrid_query_time": 0.006457805633544922,
+        "tfidf_index_time": 0.24497509002685547,
+        "tfidf_query_time": 0.0022678375244140625
       }
     ]
   }
