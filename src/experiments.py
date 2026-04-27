@@ -167,7 +167,7 @@ class ExperimentalEvaluation:
         # Test different numbers of hash functions
         for num_hashes in [32, 64, 128, 256]:
             from src.lsh import LSH
-            lsh = LSH(num_hashes=num_hashes, num_bands=8)
+            lsh = LSH(num_hashes=num_hashes, num_bands=num_hashes)
 
             # Re-index documents
             for chunk_id, chunk_text in self.qa_system.documents.items():
@@ -175,7 +175,7 @@ class ExperimentalEvaluation:
                 lsh.index_document(chunk_id, tokens)
 
             start = time.time()
-            retrieved = lsh.query(test_query_tokens)
+            retrieved = lsh.query(test_query_tokens, threshold=0.0)
             elapsed = time.time() - start
 
             results['hash_functions'][num_hashes] = {
@@ -183,8 +183,8 @@ class ExperimentalEvaluation:
                 'results': len(retrieved)
             }
 
-        # Test different numbers of bands
-        for num_bands in [2, 4, 8, 16]:
+        # Test different numbers of bands (sensitivity: fewer rows/band = more sensitive)
+        for num_bands in [8, 16, 32, 64, 128]:
             from src.lsh import LSH
             lsh = LSH(num_hashes=128, num_bands=num_bands)
 
@@ -193,7 +193,7 @@ class ExperimentalEvaluation:
                 lsh.index_document(chunk_id, tokens)
 
             start = time.time()
-            retrieved = lsh.query(test_query_tokens)
+            retrieved = lsh.query(test_query_tokens, threshold=0.0)
             elapsed = time.time() - start
 
             results['bands'][num_bands] = {
@@ -246,7 +246,7 @@ class ExperimentalEvaluation:
 
             # Test LSH performance
             if self.qa_system.lsh:
-                lsh = LSH(num_hashes=128, num_bands=8)
+                lsh = LSH(num_hashes=128, num_bands=128)
                 start = time.time()
 
                 for doc_id, text in scaled_docs.items():
@@ -257,7 +257,7 @@ class ExperimentalEvaluation:
 
                 query_tokens = set(self.qa_system.processor.tokenize(query))
                 start = time.time()
-                retrieved = lsh.query(query_tokens, threshold=0.1)
+                retrieved = lsh.query(query_tokens, threshold=0.0)
                 query_time = time.time() - start
             else:
                 index_time = query_time = 0

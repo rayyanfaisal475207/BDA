@@ -116,18 +116,36 @@ class DocumentProcessor:
             for chunk_id, chunk_text, page_num in chunks
         }
 
-    def tokenize(self, text: str) -> List[str]:
+    # Common English stop words to remove before MinHash/SimHash comparison
+    _STOP_WORDS = frozenset({
+        'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
+        'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could',
+        'should', 'may', 'might', 'shall', 'can', 'to', 'of', 'in', 'for',
+        'on', 'with', 'at', 'by', 'from', 'as', 'or', 'and', 'but', 'not',
+        'this', 'that', 'these', 'those', 'it', 'its', 'if', 'so', 'up',
+        'out', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other',
+        'some', 'such', 'than', 'then', 'there', 'when', 'where', 'who',
+        'which', 'what', 'how', 'no', 'nor', 'only', 'own', 'same', 'too',
+        'very', 'just', 'about', 'above', 'after', 'also', 'into', 'through',
+        'during', 'before', 'between', 'you', 'he', 'she', 'we', 'they',
+        'their', 'your', 'his', 'her', 'our', 'my', 'i', 'me', 'him', 'us',
+    })
+
+    def tokenize(self, text: str, remove_stop_words: bool = True) -> List[str]:
         """
-        Simple tokenization (can be enhanced).
+        Tokenize text into meaningful content words.
 
         Args:
             text: Text to tokenize
+            remove_stop_words: Filter common English stop words (default True)
 
         Returns:
-            List of tokens
+            List of tokens (min length 2, stop-words removed when requested)
         """
         text = text.lower()
-        tokens = re.findall(r'\b\w+\b', text)
+        tokens = re.findall(r'\b[a-z]\w+\b', text)  # alphabetic words only
+        if remove_stop_words:
+            tokens = [t for t in tokens if t not in self._STOP_WORDS and len(t) >= 2]
         return tokens
 
     @staticmethod

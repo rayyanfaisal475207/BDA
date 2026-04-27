@@ -31,7 +31,9 @@ class AcademicQASystem:
 
         # Initialize components
         self.processor = DocumentProcessor(chunk_size=300, overlap=50)
-        self.lsh = LSH(num_hashes=128, num_bands=8) if use_lsh else None
+        # Use 128 bands × 1 row: P(hit | Jaccard=0.01) ≈ 72%, appropriate for
+        # asymmetric query-document retrieval where queries are much shorter than docs.
+        self.lsh = LSH(num_hashes=128, num_bands=128) if use_lsh else None
         self.simhash = SimHash(hash_size=64) if use_simhash else None
         self.tfidf = TFIDFRetrieval() if use_tfidf else None
 
@@ -102,7 +104,9 @@ class AcademicQASystem:
             return []
 
         tokens = set(self.processor.tokenize(query))
-        results = self.lsh.query(tokens, threshold=0.1)
+        # threshold=0.0 — return all candidates from bucket collisions, then rank by
+        # estimated Jaccard (which will naturally be low for short queries vs. long docs)
+        results = self.lsh.query(tokens, threshold=0.0)
         return results[:top_k]
 
     def retrieve_simhash(self, query: str, top_k: int = 10) -> List[Tuple[str, float]]:
@@ -116,7 +120,9 @@ class AcademicQASystem:
             return []
 
         tokens = self.processor.tokenize(query)
-        results = self.simhash.query(tokens, self.simhash_fingerprints, threshold=0.7)
+        # 0.5 threshold: SimHash similarity of 0.5 means ~32 of 64 bits match,
+        # which is a loose but useful similarity signal for Q&A retrieval.
+        results = self.simhash.query(tokens, self.simhash_fingerprints, threshold=0.5)
         return results[:top_k]
 
     def retrieve_tfidf(self, query: str, top_k: int = 10) -> List[Tuple[str, float]]:

@@ -1,12 +1,13 @@
 """Academic Policy QA System using LSH and Big Data techniques."""
 
 __version__ = "1.0.0"
-__author__ = "BDA Project Team"
+__author__ = "LexiPolicy Dev Team"
 
 from src.lsh import MinHash, LSH, SimHash
 from src.baseline import TFIDFRetrieval
 from src.qa_system import AcademicQASystem
 from src.data_processing import DocumentProcessor
+from src.analytics import QueryPatternMiner, RetrievalAnalytics
 
 __all__ = [
     'MinHash',
@@ -14,5 +15,7 @@ __all__ = [
     'SimHash',
     'TFIDFRetrieval',
     'AcademicQASystem',
-    'DocumentProcessor'
+    'DocumentProcessor',
+    'QueryPatternMiner',
+    'RetrievalAnalytics',
 ]

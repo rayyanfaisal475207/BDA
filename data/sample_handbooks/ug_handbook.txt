@@ -1,85 +1,203 @@
-UG STUDENT HANDBOOK
+NUST SEECS UNDERGRADUATE STUDENT HANDBOOK
+School of Electrical Engineering and Computer Science
+National University of Sciences and Technology
+Islamabad, Pakistan
 
-ACADEMIC POLICIES AND PROCEDURES
+PART I — ADMISSION AND REGISTRATION
 
-1. ADMISSION AND REGISTRATION
+1.1 Admission Requirements
+Candidates seeking admission to the undergraduate programme must have completed Intermediate (HSSC) or equivalent with at least 60% marks in pre-engineering subjects. Admission is based on merit determined by the NET (NUST Entry Test) score combined with the academic record. International students must provide equivalence certificates from IBCC.
 
-1.1 Minimum GPA Requirement
-The minimum cumulative GPA required for continuing studies is 2.0. A student whose GPA falls below 2.0 may be placed on academic probation. The student is expected to improve their GPA to at least 2.0 within the next semester. If the GPA remains below 2.0 after two consecutive semesters, the student may be dismissed from the program.
-
-1.2 Course Registration
-All students must register for courses before the start of the semester. Late registration is not permitted without approval from the Academic Dean. Students must maintain a full-time status by registering for a minimum of 12 credit hours per semester.
+1.2 Course Registration Procedure
+All students are required to complete online course registration through the NUST portal before the start of each semester. Registration opens two weeks prior to semester commencement and closes on the last day of the first week of classes. Late registration attracts a penalty fee of PKR 1,000 per day. Students must consult their academic advisor before finalising their course selection each semester.
 
 1.3 Minimum and Maximum Credit Hours
-The minimum credit hours required per semester is 12. The maximum credit hours is 18 unless special permission is granted by the Academic Dean. Students may petition for more than 18 credit hours if they have maintained a GPA of 3.5 or above.
+Full-time undergraduate students must register for a minimum of 12 credit hours and a maximum of 18 credit hours per semester. Students who have maintained a cumulative CGPA of 3.5 or above in the preceding semester may, with the written approval of the Department Chairman, register for up to 21 credit hours. First-semester students are restricted to a maximum of 16 credit hours.
 
-2. ACADEMIC PERFORMANCE AND GRADING
+1.4 Add/Drop Period
+Students may add or drop courses without academic penalty during the first two weeks of a semester. After this period, a course dropped carries a 'W' (Withdrawn) notation on the transcript. No course may be dropped after the eighth week of a semester except in cases of documented medical emergency.
+
+PART II — GRADING AND ACADEMIC PERFORMANCE
 
 2.1 Grading Scale
-The following grading scale is used:
-A: 90-100 (4.0)
-B: 80-89 (3.0)
-C: 70-79 (2.0)
-D: 60-69 (1.0)
-F: Below 60 (0.0)
+NUST uses a 4.0 grading scale. The letter grades and their corresponding grade points are:
+A  : 90–100 → 4.00 (Excellent)
+A- : 85–89  → 3.70
+B+ : 80–84  → 3.30
+B  : 75–79  → 3.00 (Good)
+B- : 70–74  → 2.70
+C+ : 65–69  → 2.30
+C  : 60–64  → 2.00 (Satisfactory)
+C- : 55–59  → 1.70
+D+ : 50–54  → 1.30
+D  : 45–49  → 1.00 (Passing)
+F  : Below 45 → 0.00 (Failing)
+A grade of D or above is a passing grade. A grade of F means the student has failed the course.
 
-2.2 GPA Calculation
-The GPA is calculated as the weighted average of all course grades taken at the institution. The GPA is calculated on a 4.0 scale.
+2.2 CGPA Calculation
+The Cumulative Grade Point Average (CGPA) is calculated as the sum of (grade points × credit hours) for all courses divided by the total credit hours attempted. Only the most recent grade is used in CGPA calculation when a course is repeated.
 
-2.3 Grade Appeal
-Students may appeal a grade within 30 days of receiving their grade report. The appeal must be submitted in writing to the instructor. If the student is not satisfied with the instructor's response, they may appeal to the Department Chair.
+2.3 Grade Submission and Finalization
+Instructors submit grades within five working days after the final examination. Grades become final after review by the Department Examination Committee. Any discrepancy must be reported within 15 working days of grade publication.
 
-3. ATTENDANCE POLICY
+2.4 Grade Appeal and Review Process
+A student who believes a grading error has occurred may file a formal grade appeal. The appeal must be submitted in writing to the concerned Course Coordinator within 15 working days of grade publication. Supporting evidence must accompany the appeal. The Department Examination Committee reviews all appeals and issues a final decision within 10 working days. If unsatisfied, the student may escalate to the Dean's office.
 
-3.1 Class Attendance
-Regular attendance is mandatory. Students are expected to attend all classes. Instructors have the right to award a failing grade to students with excessive absences.
+2.5 Incomplete Grade Policy
+An 'I' (Incomplete) grade may be assigned when a student is unable to complete a course due to a documented medical emergency or a family crisis occurring near the end of the semester. The student must complete the remaining work within six weeks of the start of the following semester. Failure to do so converts the 'I' to an 'F'.
 
-3.2 Absence Reporting
-Students must inform their instructors of any unavoidable absences. Medical certificates should be submitted if absent due to illness. Three consecutive unauthorized absences may result in automatic withdrawal from the course.
+PART III — ATTENDANCE POLICY
 
-3.3 Make-up Classes
-Make-up classes will be arranged for absences due to legitimate reasons such as illness, family emergencies, or university-sponsored events.
+3.1 Mandatory Attendance
+Regular and punctual attendance in all scheduled classes, laboratories, and tutorials is mandatory at NUST. Attendance is a fundamental academic obligation, and the university considers it essential for academic success.
 
-4. COURSE REQUIREMENTS AND CREDIT SYSTEM
+3.2 Attendance Threshold and Consequences
+A student who accumulates more than 20% absences in any course will be barred from sitting the final examination of that course and will automatically receive an 'F' grade. Instructors take attendance at the beginning of every class. Being present in class means being present for the full duration.
 
-4.1 Credit Hours
-Each course has a certain number of credit hours based on the number of lectures and lab hours. One credit hour is equivalent to one hour of lecture per week for a semester. Laboratory courses carry 0.5 credit hours per lab hour.
+3.3 Late Arrivals
+A student who arrives more than 10 minutes after the scheduled start of a class will be marked absent for that session. Three consecutive unexcused absences will trigger an automatic warning letter from the Head of Department.
 
-4.2 Course Repetition
-A student may repeat a course in which they received a D or F grade. The repeated course grade will replace the previous grade in the GPA calculation. The course may only be repeated once.
+3.4 Legitimate Absences and Leave of Absence
+Absences due to documented illness, hospitalisation, or official NUST representation (sports, competitions, delegations) are considered legitimate. Supporting documentation must be provided to the Course Instructor within three working days of return. Medical certificates must be from a registered medical practitioner. A student intending to be absent for more than one week must apply for formal leave through the Academic Advisor.
 
-4.3 Prerequisite Requirements
-Students must have completed the prerequisite courses with a minimum grade of C before enrolling in higher-level courses. Exceptions must be approved by the Department Chair.
+3.5 Make-Up Classes
+Make-up classes for legitimate absences may be arranged by the instructor at their discretion. It is the student's responsibility to approach the instructor and arrange any missed assessments within one week of return.
 
-5. ACADEMIC PROBATION AND DISMISSAL
+PART IV — COURSE REQUIREMENTS AND CREDIT SYSTEM
 
-5.1 Academic Probation Criteria
-A student is placed on academic probation if their cumulative GPA falls below 2.0. The student is expected to improve their GPA to at least 2.0 within one semester.
+4.1 Credit Hour Definition
+One credit hour is equivalent to one 50-minute lecture per week for one semester. Laboratory courses carry credit hours at the rate of one credit hour per three hours of laboratory work per week. A three-credit-hour theory course meets for approximately 150 minutes per week.
 
-5.2 Dismissal Policy
-If a student's cumulative GPA remains below 2.0 after two consecutive semesters on probation, the student may be dismissed from the program. A dismissed student may appeal to the Academic Senate.
+4.2 Course Repetition Policy
+A student who receives a failing grade (F) in a course is required to repeat that course in the next available semester, unless the course has been discontinued. A student may also voluntarily repeat a course in which they obtained a D grade in order to improve their CGPA. When a course is repeated, the new grade replaces the old grade in the CGPA calculation, although both grades remain on the transcript. A course may be repeated a maximum of two times. Failure to pass a required course after two repetitions results in academic dismissal. Students repeating courses must obtain clearance from their Academic Advisor.
 
-5.3 Reinstatement
-A dismissed student may request reinstatement after sitting out for one full year. The student must submit a formal appeal explaining how they plan to succeed if reinstated.
+4.3 Prerequisite and Co-requisite Policy
+Students must satisfy all prerequisite requirements before enrolling in a course. Prerequisites must have been passed with a minimum grade of C (2.00). The Registrar's office verifies prerequisites during registration. Exceptions require a written waiver from the Department Chairman. Co-requisites must be taken simultaneously in the same semester.
 
-6. DEGREE REQUIREMENTS
+4.4 Core and Elective Courses
+The undergraduate curriculum consists of core courses (mandatory for all students in the programme), elective courses (chosen from an approved list), and free electives (any university-level courses). Core courses must be completed to graduate. Students cannot substitute a core course with an elective without prior written approval from the Programme Director.
 
-6.1 General Degree Requirements
-To earn a bachelor's degree, a student must complete a minimum of 120 credit hours with a cumulative GPA of at least 2.0. Students must also meet all major and elective requirements.
+4.5 Final Year Project (FYP)
+All undergraduate students must complete a Final Year Project (FYP) worth 6 credit hours spanning two semesters (FYP-I and FYP-II). Students must identify a supervisor from the department by the start of their seventh semester. The FYP involves a proposal, mid-semester progress review, and a final viva. A student who fails FYP-II must redo the entire project with a new topic.
 
-6.2 Major Requirements
-Each major has specific course requirements that must be completed. These requirements typically include 40-60 credit hours in the major field of study.
+PART V — ACADEMIC STANDING AND PROBATION
 
-6.3 General Education Requirements
-All students must complete general education requirements including English composition, mathematics, sciences, humanities, and social sciences. These typically account for 30-40 credit hours.
+5.1 Good Academic Standing
+A student is in good academic standing if their CGPA is 2.0 or above. Good standing is required to participate in extracurricular activities, hold elected student positions, and apply for scholarships or exchange programmes.
 
-7. GRADUATION REQUIREMENTS
+5.2 Academic Warning
+A student whose CGPA falls below 2.5 receives an Academic Warning letter. This letter is intended to alert the student to seek guidance before the situation deteriorates. An Academic Warning does not affect the student's enrolment status.
 
-7.1 Eligibility for Graduation
-Students are eligible for graduation when they have completed all degree requirements and have a cumulative GPA of at least 2.0. A final review is conducted to ensure all requirements have been met.
+5.3 Academic Probation Criteria
+A student is placed on Academic Probation when their CGPA falls below 2.0 at the end of any semester. Being on probation restricts the student from participating in competitions representing NUST, holding leadership positions in student societies, and obtaining departmental recommendation letters. A student on probation must meet with their Academic Advisor at least once every two weeks.
 
-7.2 Graduation Application
-Students must apply for graduation by the deadline specified by the Registrar's Office. Late applications may result in delayed graduation.
+5.4 Conditions to Remove Probation
+A student on probation must raise their CGPA to at least 2.0 within the next two consecutive semesters. Failure to do so results in academic dismissal. Summer courses can be used to improve grades and potentially remove probation status.
 
-7.3 Academic Honors
-Students who graduate with a GPA of 3.5 or above graduate with honors. Those with a GPA of 3.8 or above graduate with highest honors.
+5.5 Academic Dismissal
+A student will be academically dismissed if:
+(a) The CGPA remains below 2.0 after two consecutive semesters on probation.
+(b) The student fails a required course for the third time.
+(c) The student fails more than 50% of registered credit hours in a single semester.
+A formally dismissed student is notified in writing by the Registrar. The dismissal takes effect from the following semester.
+
+5.6 Reinstatement After Dismissal
+A dismissed student may apply for reinstatement after a mandatory gap of one full academic year. The application must be submitted to the Office of the Dean with a statement of intent, a plan of action for academic improvement, and two academic references. The Academic Council reviews reinstatement applications and informs the student of its decision within four weeks. Reinstatement is not guaranteed and is granted at the discretion of the Council.
+
+PART VI — DEGREE REQUIREMENTS
+
+6.1 Minimum Requirements for Graduation
+To be eligible for the award of a Bachelor's degree, a student must:
+(a) Complete all compulsory and elective courses required by the programme (minimum 130 credit hours for most engineering programmes).
+(b) Achieve a minimum CGPA of 2.0.
+(c) Complete the Final Year Project (FYP) successfully.
+(d) Pass all laboratory courses.
+(e) Have no outstanding dues with the university.
+(f) Have no active disciplinary case.
+
+6.2 Residency Requirement
+Students must complete at least 50% of the credit hours required for their degree at NUST. This residency requirement applies even for students who transfer from other institutions.
+
+6.3 Time Limit for Degree Completion
+An undergraduate student must complete all degree requirements within the maximum allowed duration. The maximum allowed duration is the standard programme duration plus two additional years. For a four-year programme, the maximum allowed duration is six years. A student who fails to complete within this period is discontinued from the programme.
+
+6.4 Academic Distinction and Honors
+Students who achieve a CGPA of 3.50 to 3.74 graduate with a Degree with Merit (Silver Medal). Students who achieve a CGPA of 3.75 or above graduate with a Degree with High Merit (Gold Medal). The CGPA must have been achieved without having failed any course and without any disciplinary action on record.
+
+PART VII — GRADUATION AND CONVOCATION
+
+7.1 Graduation Eligibility Audit
+In the semester preceding expected graduation, students undergo a Graduation Eligibility Audit conducted by the Registrar's Office. All outstanding requirements, dues, and pending grades are reviewed.
+
+7.2 Graduation Application Deadline
+Students intending to graduate in a given semester must file a Graduation Application through the student portal no later than the fourth week of that semester. Students who miss the deadline will be deferred to the following semester's graduation cycle.
+
+7.3 Convocation
+NUST holds an annual convocation ceremony for graduating students. Attendance at convocation is expected but not mandatory. Degrees are awarded regardless of attendance.
+
+PART VIII — EXAMINATION REGULATIONS
+
+8.1 Mid-Semester Examinations
+Each course typically holds at least one mid-semester examination. Dates are announced on the course syllabus. Missing a mid-semester examination without prior approval or documented justification results in a zero mark for that assessment.
+
+8.2 Final Examinations
+Final examinations are held at the end of each semester during the officially scheduled examination period. The examination timetable is published by the Examination Section at least three weeks before the start of examinations. Students must carry their NUST Student ID to enter the examination hall.
+
+8.3 Cheating and Academic Dishonesty
+Any form of academic dishonesty, including plagiarism, cheating in examinations, or fabricating data, is a serious offence. A student found guilty of academic dishonesty may receive a zero in the assessment, a failing grade in the course, suspension, or permanent expulsion, depending on the severity of the offence. All cases are referred to the Academic Integrity Committee.
+
+8.4 Special/Supplementary Examination
+A student who misses a final examination due to a documented medical emergency may apply for a Special Examination within five working days of the scheduled exam. The application must be submitted to the concerned department with supporting documentation. Special examinations are held once per semester and are a privilege, not a right.
+
+PART IX — SCHOLARSHIPS AND FINANCIAL AID
+
+9.1 Merit Scholarships
+NUST awards merit scholarships to students who achieve a CGPA of 3.5 or above in a semester. The scholarship covers a percentage of tuition fee and is reviewed each semester. Misconduct or a drop in CGPA below the required threshold results in loss of the scholarship.
+
+9.2 Need-Based Financial Aid
+Students with demonstrated financial need may apply for need-based financial aid. Applications are submitted to the Bursar's Office with supporting financial documentation. Aid is disbursed as fee waivers or monthly stipends. The Financial Aid Committee reviews all applications and announces decisions within six weeks.
+
+9.3 External Scholarships
+Students are encouraged to apply for external scholarships offered by government bodies, NGOs, and foreign embassies. NUST provides attestation letters and supporting documentation for students applying for external scholarships. The Scholarship Section maintains an updated list of available external scholarships.
+
+PART X — STUDENT CONDUCT AND DISCIPLINE
+
+10.1 Code of Conduct
+All students are expected to uphold the NUST Code of Conduct, which includes integrity, respect, responsibility, and fairness. Violations of the Code of Conduct are investigated by the Student Discipline Committee (SDC).
+
+10.2 Disciplinary Actions
+Depending on the nature and gravity of the offence, the SDC may impose warnings, fines, community service, suspension from academic activities, or expulsion. A student has the right to appeal a disciplinary decision to the Dean's office within 10 working days of notification.
+
+10.3 Drug and Alcohol Policy
+NUST maintains a strict zero-tolerance policy towards illegal drugs and alcohol on campus. Any student found in possession of or under the influence of illegal substances on campus will be immediately suspended pending a formal investigation. Confirmed violations lead to expulsion.
+
+PART XI — TRANSFER, WITHDRAWAL AND DEFERMENT
+
+11.1 Transfer Within NUST
+A student may apply to transfer from one NUST department/programme to another. Transfer applications are accepted twice annually, at the start of each academic year and at the start of the second semester. Transfer is subject to seat availability and requires a minimum CGPA of 2.5. Credit transfers are evaluated on a course-by-course basis.
+
+11.2 Voluntary Withdrawal
+A student may voluntarily withdraw from the university by submitting a formal withdrawal application to the Registrar. All financial dues must be settled before withdrawal is processed. A student who withdraws in good standing may apply for readmission within two academic years.
+
+11.3 Semester Deferment
+A student may apply for a semester deferment (freeze) for medical, financial, or personal reasons. Applications must be submitted before the end of the second week of the semester. A maximum of two semester deferments are allowed during the entire undergraduate programme. Tuition fees are not refunded for semesters deferred after week two.
+
+APPENDIX A — SAMPLE ACADEMIC QUERIES AND ANSWERS
+
+Q: What is the minimum CGPA required to remain enrolled?
+A: Students must maintain a minimum CGPA of 2.0. A CGPA below 2.0 places the student on Academic Probation.
+
+Q: How many times can I repeat a failing course?
+A: A course may be repeated a maximum of two times. Failure after two repetitions results in academic dismissal.
+
+Q: What is the maximum percentage of absences allowed?
+A: Students may not exceed 20% absences in any course. Exceeding this threshold bars the student from the final examination.
+
+Q: What is the maximum number of credit hours per semester?
+A: The normal maximum is 18 credit hours. Students with a CGPA of 3.5 or above may apply to take up to 21 credit hours.
+
+Q: How do I appeal a grade?
+A: Submit a written appeal to the Course Coordinator within 15 working days of grade publication. The Department Examination Committee reviews it and decides within 10 working days.
+
+Q: What GPA do I need to graduate with honors?
+A: A CGPA of 3.50–3.74 earns Degree with Merit (Silver Medal). A CGPA of 3.75 or above earns Degree with High Merit (Gold Medal).
