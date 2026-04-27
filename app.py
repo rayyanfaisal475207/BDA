@@ -684,22 +684,40 @@ if st.session_state.system_ready:
             fig_sc = go.Figure()
             fig_sc.add_trace(go.Scatter(
                 x=df_scale['doc_count'], y=df_scale['lsh_query_time'],
-                name='LSH (Approximate)', line=dict(color='#000000', width=3)
+                name='LSH (Approximate)', line=dict(color='#6366f1', width=3)
+            ))
+            fig_sc.add_trace(go.Scatter(
+                x=df_scale['doc_count'], y=df_scale['hybrid_query_time'],
+                name='Hybrid (Ensemble)', line=dict(color='#10b981', width=3)
             ))
             fig_sc.add_trace(go.Scatter(
                 x=df_scale['doc_count'], y=df_scale['tfidf_query_time'],
-                name='TF-IDF (Exact)', line=dict(color='#999999', width=2, dash='dash')
+                name='TF-IDF (Exact)', line=dict(color='#f59e0b', width=2, dash='dash')
             ))
             fig_sc.update_layout(
                 xaxis_title="Document Count", yaxis_title="Query Time (s)",
                 plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                 font_family="Inter", height=380,
-                legend=dict(bgcolor='rgba(0,0,0,0)'),
+                legend=dict(bgcolor='rgba(0,0,0,0)', orientation='h', y=1.2),
                 margin=dict(l=20, r=20, t=20, b=40)
             )
             fig_sc.update_xaxes(showgrid=True, gridcolor='#EEE')
             fig_sc.update_yaxes(showgrid=True, gridcolor='#EEE')
-            st.plotly_chart(fig_sc, use_container_width=True, config={'displayModeBar': False})
+            st.plotly_chart(fig_sc, use_container_width=True)
+
+            # Accuracy Metrics Table in App
+            st.markdown("#### ACCURACY BENCHMARKS")
+            st.markdown("<small style='color:#666;'>Retrieval precision and recall relative to TF-IDF ground truth</small>", unsafe_allow_html=True)
+            acc_data = res['retrieval_comparison']['methods']
+            acc_rows = []
+            for m_id, m_data in acc_data.items():
+                acc_rows.append({
+                    'Method': m_data['label'],
+                    'Avg Latency (ms)': f"{m_data['avg_time']*1000:.2f}",
+                    'Recall': f"{m_data['avg_recall']:.2f}",
+                    'Precision': f"{m_data['avg_precision']:.2f}"
+                })
+            st.table(pd.DataFrame(acc_rows))
 
             # Speedup table
             if not df_scale.empty:

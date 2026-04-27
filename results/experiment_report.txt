@@ -1,0 +1,74 @@
+================================================================================
+EXPERIMENTAL EVALUATION REPORT
+Scalable Academic Policy QA System
+================================================================================
+
+1. RETRIEVAL METHOD COMPARISON (Relative to TF-IDF)
+--------------------------------------------------------------------------------
+Total Queries Tested: 15
+Top-K Results: 5
+
+Method                    | Latency    | Recall   | Precision 
+--------------------------------------------------------------------------------
+TF-IDF (Baseline)         |    0.70 ms |    1.00 |      1.00
+LSH (MinHash)             |    0.41 ms |    0.37 |      0.24
+SimHash                   |    0.91 ms |    0.21 |      0.08
+Hybrid (RRF)              |    1.49 ms |    0.35 |      0.21
+
+
+2. PARAMETER SENSITIVITY ANALYSIS
+--------------------------------------------------------------------------------
+
+Hash Functions Impact:
+  32 hashes: 0.000221s, 43 results
+  64 hashes: 0.000166s, 18 results
+  128 hashes: 0.000329s, 49 results
+  256 hashes: 0.000581s, 77 results
+
+Bands Impact (LSH Bands):
+  8 bands: 0.000054s, 0 results
+  16 bands: 0.000052s, 0 results
+  32 bands: 0.000060s, 0 results
+  64 bands: 0.000088s, 0 results
+  128 bands: 0.000230s, 31 results
+
+SimHash Threshold Impact:
+  Threshold 0.5: 68 results
+  Threshold 0.6: 3 results
+  Threshold 0.7: 0 results
+  Threshold 0.8: 0 results
+  Threshold 0.9: 0 results
+
+
+3. SCALABILITY ANALYSIS
+--------------------------------------------------------------------------------
+Original Document Count: 254
+
+Scale Factor: 1x (254 documents)
+  LSH Index Time: 0.482314s
+  LSH Query Time: 0.000437s
+  TF-IDF Index Time: 0.040598s
+  TF-IDF Query Time: 0.000839s
+
+Scale Factor: 2x (508 documents)
+  LSH Index Time: 1.111392s
+  LSH Query Time: 0.000703s
+  TF-IDF Index Time: 0.095131s
+  TF-IDF Query Time: 0.001144s
+
+Scale Factor: 5x (1270 documents)
+  LSH Index Time: 3.137141s
+  LSH Query Time: 0.002993s
+  TF-IDF Index Time: 0.276782s
+  TF-IDF Query Time: 0.002435s
+
+Scale Factor: 10x (2540 documents)
+  LSH Index Time: 4.298345s
+  LSH Query Time: 0.001249s
+  TF-IDF Index Time: 0.273153s
+  TF-IDF Query Time: 0.002360s
+
+
+================================================================================
+END OF REPORT
+================================================================================
