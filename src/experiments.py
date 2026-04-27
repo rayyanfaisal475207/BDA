@@ -105,13 +105,11 @@ class ExperimentalEvaluation:
     def evaluate_retrieval_methods(self, top_k: int = 5) -> Dict:
         """
         Compare retrieval methods: LSH, SimHash, and TF-IDF.
-
-        Returns:
-            Dictionary with comparison results
+        Treats TF-IDF as the ground truth for Precision/Recall.
         """
         queries = self.test_queries()
-        methods = [('lsh', 'LSH (MinHash)'), ('simhash', 'SimHash'),
-                  ('tfidf', 'TF-IDF (Baseline)')]
+        methods = [('lsh', 'LSH (MinHash)'), ('simhash', 'SimHash')]
+        baseline_method = 'tfidf'
 
         results = {
             'queries': len(queries),
@@ -119,34 +117,54 @@ class ExperimentalEvaluation:
             'methods': {}
         }
 
-        for method_name, method_label in methods:
-            method_results = {
-                'label': method_label,
-                'queries': [],
-                'avg_time': 0,
-                'total_time': 0,
-                'retrieval_times': []
+        # First, get baseline (ground truth) for all queries
+        baseline_data = {}
+        for query in queries:
+            retrieved, timing = self.qa_system.retrieve(query, method=baseline_method, top_k=top_k, timings=True)
+            baseline_data[query] = {
+                'ids': set([r[0] for r in retrieved]),
+                'time': timing.get('retrieval_time', 0) if timing else 0
             }
 
+        # Add baseline to results
+        results['methods'][baseline_method] = {
+            'label': 'TF-IDF (Baseline)',
+            'avg_time': sum(d['time'] for d in baseline_data.values()) / len(queries),
+            'avg_recall': 1.0,
+            'avg_precision': 1.0
+        }
+
+        for method_name, method_label in methods:
+            total_time = 0
+            total_recall = 0
+            total_precision = 0
+
             for query in queries:
-                retrieved, timing = self.qa_system.retrieve(
-                    query, method=method_name, top_k=top_k, timings=True
-                )
+                retrieved, timing = self.qa_system.retrieve(query, method=method_name, top_k=top_k, timings=True)
+                r_time = timing.get('retrieval_time', 0) if timing else 0
+                total_time += r_time
 
-                retrieval_time = timing.get('retrieval_time', 0) if timing else 0
-                method_results['retrieval_times'].append(retrieval_time)
+                # Calculate Recall & Precision vs. Baseline
+                retrieved_ids = set([r[0] for r in retrieved])
+                ground_truth_ids = baseline_data[query]['ids']
+                
+                if not ground_truth_ids:
+                    recall = 1.0
+                    precision = 1.0 if not retrieved_ids else 0.0
+                else:
+                    hits = len(retrieved_ids & ground_truth_ids)
+                    recall = hits / len(ground_truth_ids)
+                    precision = hits / len(retrieved_ids) if retrieved_ids else 0.0
 
-                method_results['queries'].append({
-                    'query': query,
-                    'num_results': len(retrieved),
-                    'time': retrieval_time,
-                    'top_result': retrieved[0] if retrieved else None
-                })
+                total_recall += recall
+                total_precision += precision
 
-                method_results['total_time'] += retrieval_time
-
-            method_results['avg_time'] = method_results['total_time'] / len(queries)
-            results['methods'][method_name] = method_results
+            results['methods'][method_name] = {
+                'label': method_label,
+                'avg_time': total_time / len(queries),
+                'avg_recall': total_recall / len(queries),
+                'avg_precision': total_precision / len(queries)
+            }
 
         return results
 
@@ -315,23 +333,44 @@ class ExperimentalEvaluation:
             print("No results to plot. Run experiments first.")
             return
 
-        # Plot 1: Retrieval time comparison
+        # Plot 1: Speed vs Recall Trade-off
         methods_data = self.results.get('retrieval_comparison', {}).get('methods', {})
         if methods_data:
             fig, ax = plt.subplots(figsize=(10, 6))
-            method_names = []
-            avg_times = []
+            
+            for m_id, data in methods_data.items():
+                ax.scatter(data['avg_time'] * 1000, data['avg_recall'], s=200, label=data['label'])
+                ax.annotate(data['label'], (data['avg_time'] * 1000, data['avg_recall']), 
+                            xytext=(5, 5), textcoords='offset points')
 
-            for method_name, method_data in methods_data.items():
-                method_names.append(method_data['label'])
-                avg_times.append(method_data['avg_time'])
+            ax.set_xlabel('Average Latency (ms)')
+            ax.set_ylabel('Recall (Relative to TF-IDF)')
+            ax.set_title('Speed vs Recall Trade-off')
+            ax.grid(alpha=0.3)
+            ax.set_ylim(0, 1.1)
+            plt.tight_layout()
+            plt.savefig(f"{output_dir}/speed_recall_tradeoff.png", dpi=300)
+            plt.close()
 
-            ax.bar(method_names, avg_times, color=['#1f77b4', '#ff7f0e', '#2ca02c'])
-            ax.set_ylabel('Average Query Time (seconds)')
-            ax.set_title('Retrieval Time Comparison')
+            # Plot 2: Accuracy Metrics (Recall & Precision)
+            fig, ax = plt.subplots(figsize=(10, 6))
+            m_labels = [d['label'] for d in methods_data.values()]
+            recalls = [d['avg_recall'] for d in methods_data.values()]
+            precisions = [d['avg_precision'] for d in methods_data.values()]
+            
+            x = np.arange(len(m_labels))
+            width = 0.35
+            ax.bar(x - width/2, recalls, width, label='Recall', color='#1f77b4')
+            ax.bar(x + width/2, precisions, width, label='Precision', color='#ff7f0e')
+            
+            ax.set_ylabel('Score')
+            ax.set_title('Accuracy Metrics by Algorithm')
+            ax.set_xticks(x)
+            ax.set_xticklabels(m_labels)
+            ax.legend()
             ax.grid(axis='y', alpha=0.3)
             plt.tight_layout()
-            plt.savefig(f"{output_dir}/retrieval_time_comparison.png", dpi=300)
+            plt.savefig(f"{output_dir}/accuracy_comparison.png", dpi=300)
             plt.close()
 
         # Plot 2: Scalability test
@@ -379,19 +418,17 @@ class ExperimentalEvaluation:
             f.write("=" * 80 + "\n\n")
 
             # Retrieval comparison
-            f.write("1. RETRIEVAL METHOD COMPARISON\n")
+            f.write("1. RETRIEVAL METHOD COMPARISON (Relative to TF-IDF)\n")
             f.write("-" * 80 + "\n")
             methods_data = self.results.get('retrieval_comparison', {})
             if methods_data:
                 f.write(f"Total Queries Tested: {methods_data.get('queries', 0)}\n")
                 f.write(f"Top-K Results: {methods_data.get('top_k', 0)}\n\n")
 
+                f.write(f"{'Method':<25} | {'Latency':<10} | {'Recall':<8} | {'Precision':<10}\n")
+                f.write("-" * 80 + "\n")
                 for method_name, data in methods_data.get('methods', {}).items():
-                    f.write(f"\n{data['label']}:\n")
-                    f.write(f"  Average Query Time: {data['avg_time']:.6f} seconds\n")
-                    f.write(f"  Total Time: {data['total_time']:.6f} seconds\n")
-                    f.write(f"  Min Time: {min(data['retrieval_times']):.6f} seconds\n")
-                    f.write(f"  Max Time: {max(data['retrieval_times']):.6f} seconds\n")
+                    f.write(f"{data['label']:<25} | {data['avg_time']*1000:7.2f} ms | {data['avg_recall']:7.2f} | {data['avg_precision']:9.2f}\n")
 
             # Parameter sensitivity
             f.write("\n\n2. PARAMETER SENSITIVITY ANALYSIS\n")

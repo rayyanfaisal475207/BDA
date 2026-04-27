@@ -300,6 +300,36 @@ if 'qa_system' not in st.session_state:
     st.session_state.qa_system = None
 if 'system_ready' not in st.session_state:
     st.session_state.system_ready = False
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+
+# ... (CSS part remains similar, adding chat specific CSS)
+st.markdown("""
+<style>
+    /* Chat specific styles */
+    .stChatMessage {
+        background-color: #FFFFFF !important;
+        border: 2px solid #000000 !important;
+        border-radius: 0 !important;
+        padding: 20px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .stChatMessage[data-testid="stChatMessageUser"] {
+        background-color: #f0f0f0 !important;
+    }
+
+    .stChatInputContainer {
+        border-top: 4px solid #000000 !important;
+        padding-top: 20px !important;
+    }
+    
+    .stChatInputContainer textarea {
+        border-radius: 0 !important;
+        border: 2px solid #000000 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # Sidebar Branding
 with st.sidebar:
@@ -329,18 +359,23 @@ with st.sidebar:
     else:
         st.success("STATUS: OPTIMAL")
         st.markdown("### CONFIG")
-        method_label = st.selectbox("ALGORITHM", ["LSH / MINHASH", "SIMHASH", "TF-IDF / EXACT"])
+        method_label = st.selectbox("ALGORITHM", ["LSH / MINHASH", "SIMHASH", "TF-IDF / EXACT", "HYBRID (ENSEMBLE)"])
         top_k = st.slider("CANDIDATES", 1, 15, 5)
         ans_mode = st.radio("SYNTHESIS", ["EXTRACTIVE", "GEMINI FLASH"], horizontal=True)
         
-        method_map = {"LSH / MINHASH": "lsh", "SIMHASH": "simhash", "TF-IDF / EXACT": "tfidf"}
+        method_map = {
+            "LSH / MINHASH": "lsh", 
+            "SIMHASH": "simhash", 
+            "TF-IDF / EXACT": "tfidf",
+            "HYBRID (ENSEMBLE)": "hybrid"
+        }
 
 # Main Content
 st.markdown('<div class="brand-title">Finrate.</div>', unsafe_allow_html=True)
 st.markdown('<div class="brand-subtitle">Automated Policy Governance & Retrieval</div>', unsafe_allow_html=True)
 
 if st.session_state.system_ready:
-    tab_qa, tab_stats, tab_bench = st.tabs(["[ QUERY ]", "[ ANALYTICS ]", "[ BENCHMARK ]"])
+    tab_qa, tab_chat, tab_stats, tab_bench = st.tabs(["[ QUERY ]", "[ CONVERSATION ]", "[ ANALYTICS ]", "[ BENCHMARK ]"])
     
     with tab_qa:
         query = st.text_input("ENTER QUESTION", placeholder="Search academic statutes...", label_visibility="collapsed")
@@ -384,7 +419,8 @@ if st.session_state.system_ready:
                     for i, chunk in enumerate(result["retrieved_chunks"]):
                         conf_pct = chunk.get('confidence', 0.0)
                         bar_w = max(2, int(conf_pct * 100))
-                        with st.expander(f"CHUNK_{i+1:02d}  ·  CONF {conf_pct:.0%}  ·  SIM {chunk['similarity']:.4f}  ·  {chunk['source']}"):
+                        found_by_str = " + ".join(chunk.get('found_by', []))
+                        with st.expander(f"CHUNK_{i+1:02d}  ·  {found_by_str}  ·  CONF {conf_pct:.0%}  ·  {chunk['source']}"):
                             st.markdown(
                                 f'<div style="background:#EEE;height:4px;width:100%;margin-bottom:12px;border-radius:0;">'
                                 f'<div style="background:#000;height:4px;width:{bar_w}%;"></div></div>'
@@ -393,6 +429,50 @@ if st.session_state.system_ready:
                             )
                 else:
                     st.warning("NO RELEVANT DATA LOCATED")
+
+    with tab_chat:
+        st.markdown("### ACADEMIC DIALOGUE")
+        st.markdown("<small style='color:#888;letter-spacing:1px;'>Conversational AI interface for contextual policy inquiry.</small>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Display chat messages from history on app rerun
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+        # React to user input
+        if prompt := st.chat_input("Ask about academic policies..."):
+            # Display user message in chat message container
+            with st.chat_message("user"):
+                st.markdown(prompt)
+            
+            # Add user message to chat history
+            st.session_state.messages.append({"role": "user", "content": prompt})
+
+            with st.chat_message("assistant"):
+                with st.spinner("THINKING..."):
+                    chat_res = st.session_state.qa_system.chat(
+                        prompt, 
+                        st.session_state.messages[:-1], # pass history excluding current prompt
+                        method=method_map[method_label],
+                        top_k=top_k,
+                        answer_method='llm' if "GEMINI" in ans_mode else 'extractive'
+                    )
+                    response = chat_res['answer']
+                    st.markdown(response)
+                    
+                    # Optional: Show sources in a small expander
+                    if chat_res.get('retrieved_chunks'):
+                        with st.expander("Sourced Documents"):
+                            for i, chunk in enumerate(chat_res['retrieved_chunks']):
+                                st.markdown(f"**{i+1}. {chunk['source']}** (Page {chunk['page']})")
+
+            # Add assistant response to chat history
+            st.session_state.messages.append({"role": "assistant", "content": response})
+
+        if st.button("CLEAR CONVERSATION"):
+            st.session_state.messages = []
+            st.rerun()
 
     with tab_stats:
         stats = st.session_state.qa_system.get_statistics()
@@ -450,8 +530,8 @@ if st.session_state.system_ready:
             st.markdown("<br>", unsafe_allow_html=True)
             perf = stats['performance_summary']
             if perf:
-                _MLABELS = {'lsh': 'LSH / MinHash', 'simhash': 'SimHash', 'tfidf': 'TF-IDF'}
-                _MCOLORS = {'LSH / MinHash': '#6366f1', 'SimHash': '#10b981', 'TF-IDF': '#f59e0b'}
+                _MLABELS = {'lsh': 'LSH / MinHash', 'simhash': 'SimHash', 'tfidf': 'TF-IDF', 'hybrid': 'Hybrid (Ensemble)'}
+                _MCOLORS = {'LSH / MinHash': '#6366f1', 'SimHash': '#10b981', 'TF-IDF': '#f59e0b', 'Hybrid (Ensemble)': '#ef4444'}
                 p_df = pd.DataFrame([
                     {
                         'Method': _MLABELS.get(m, m.upper()),
